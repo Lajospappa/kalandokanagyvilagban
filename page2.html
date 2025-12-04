@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Bányamúzeum aranyrög - Kód bekérés</title>
+<script>
+function check() {
+    var v = document.getElementById("code").value.trim();
+    if (v === "22740") {
+        window.location.href = "content2.html";
+    } else {
+        alert("Hibás kód!");
+    }
+}
+</script>
+</head>
+<body>
+<h2>Bányamúzeum aranyrög</h2>
+<p>Add meg a kulcsot:</p>
+<input id="code" type="text">
+<button onclick="check()">Tovább</button>
+</body>
+</html>
