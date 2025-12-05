@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Glanzenberg-táró - Kód bekérés</title>
+<title>Út a város szívébe - Kód bekérés</title>
 <script>
 function check() {
     var v = document.getElementById("code").value.trim();
-    if (v === "5") {
+    if (v === "22740") {
         window.location.href = "content3.html";
     } else {
         alert("Hibás kód!");
@@ -15,10 +14,15 @@ function check() {
 }
 </script>
 </head>
+
 <body>
-<h2>Glanzenberg-táró</h2>
+
+<h2>Út a város szívébe</h2>
+
 <p>Add meg a kulcsot:</p>
-<input id="code" type="text">
+
+<input id="code" type="text" autocomplete="off">
 <button onclick="check()">Tovább</button>
+
 </body>
 </html>
