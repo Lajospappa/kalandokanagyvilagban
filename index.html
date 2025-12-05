@@ -10,7 +10,7 @@
 <style>
 body {
     font-family: Georgia, serif;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/4/4a/Banska_Stiavnica_2018.jpg') center/cover no-repeat fixed;
+    background: url('https://cdn.pixabay.com/photo/2017/08/07/20/40/banska-stiavnica-2601962_1280.jpg') center/cover no-repeat fixed;
     padding: 20px;
     margin: 0;
 }
@@ -25,21 +25,21 @@ body {
 /* Grid – mobil first */
 .grid {
     display: grid;
-    grid-template-columns: 1fr;        /* mobil: 1 oszlop */
+    grid-template-columns: 1fr;       
     gap: 20px;
 }
 
 /* Tablet méret */
 @media (min-width: 600px) {
     .grid {
-        grid-template-columns: repeat(2, 1fr);   /* 2 oszlop */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* Desktop méret */
 @media (min-width: 900px) {
     .grid {
-        grid-template-columns: repeat(3, 1fr);   /* eredeti 3 oszlop */
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
