@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Mennyei család – Kód bekérés</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Georgia, serif;
+    background: #f5f2ea;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+input {
+    padding: 8px;
+    font-size: 16px;
+    width: 95%;
+    margin-top: 8px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+</style>
+
+<script>
+function check() {
+    var v = document.getElementById("code").value.trim().toLowerCase();
+    if (v === "borbala" || v === "borbála") {
+        window.location.href = "content6.html";
+    } else {
+        alert("Hibás kód!");
+    }
+}
+</script>
+</head>
+
+<body>
+<div class="container">
+
+<h2>6. Mennyei család</h2>
+
+<p>Add meg a kulcsot:</p>
+
+<input id="code" type="text" autocomplete="off">
+<button onclick="check()">Tovább</button>
+
+</div>
+</body>
+</html>
