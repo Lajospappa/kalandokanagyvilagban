@@ -2,97 +2,134 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>7. Ahol papi nem tanított – Kód bekérés</title>
+<title>7. PONT – Ahol papi nem tanított</title>
 
+<!-- Mobil optimalizálás -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
-    font-family: Georgia, serif;
+    font-family: 'Georgia', serif;
     background: url('aterkepe.jpeg') center/cover no-repeat fixed;
     margin: 0;
     padding: 0;
+    color: #f5f5f5;
 }
 
-.overlay {
-    background: rgba(245, 242, 234, 0.9);
-    min-height: 100vh;
-    padding: 20px;
-}
-
+/* középső doboz */
 .container {
     max-width: 600px;
     margin: 40px auto;
-    background: #ffffff;
-    padding: 25px 20px 30px 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    background: rgba(0, 0, 0, 0.70);
+    padding: 24px 20px 30px 20px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
 }
 
+/* cím */
 h2 {
+    font-size: 26px;
     margin-top: 0;
-    margin-bottom: 12px;
-}
-
-p {
-    font-size: 17px;
-    line-height: 1.5;
     margin-bottom: 14px;
+    text-align: center;
+    color: #ffe7a3;
 }
 
-input {
-    padding: 8px;
+/* szöveg */
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* input + gomb */
+label {
+    display: block;
+    margin-bottom: 6px;
     font-size: 16px;
+    text-align: center;
+}
+
+input[type="text"] {
     width: 100%;
-    box-sizing: border-box;
-    margin-top: 6px;
-}
-
-button {
-    margin-top: 12px;
-    padding: 10px 18px;
-    font-size: 16px;
-    border-radius: 6px;
+    padding: 10px 12px;
+    margin-top: 4px;
+    font-size: 18px;
+    border-radius: 8px;
     border: none;
-    background: #333;
-    color: #fff;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: inherit;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
     cursor: pointer;
+    background: #ffe7a3;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
 
-button:hover {
-    background: #555;
+.btn:active {
+    transform: scale(0.98);
 }
 
-.backlink {
-    display:inline-block;
-    margin-top:18px;
-    font-size:14px;
+/* hibaüzenet */
+#error {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #ffb3b3;
+    text-align: center;
 }
-.backlink a {
-    color:#333;
-    text-decoration:none;
+
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    .container {
+        margin: 20px 10px;
+        padding: 20px 14px 24px 14px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    p, .btn, input[type="text"] {
+        font-size: 17px;
+    }
 }
 </style>
 
 <script>
-// ékezetek normalizálása, kisbetűsítés, szóközök eltüntetése
+// ékezet és kis/nagybetű ignorálása
 function normalizeInput(str) {
-    return str
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/\s+/g, "");
+    str = str.toLowerCase().trim();
+
+    // egyszerű ékezet-eltávolítás
+    const map = {
+        'á':'a','é':'e','í':'i','ó':'o','ö':'o','ő':'o',
+        'ú':'u','ü':'u','ű':'u'
+    };
+    str = str.replace(/[áéíóöőúüű]/g, c => map[c] || c);
+
+    return str;
 }
 
 function check() {
-    var v = document.getElementById("code").value.trim();
-    var n = normalizeInput(v);
+    var v = document.getElementById("code").value;
+    var norm = normalizeInput(v);
 
-    // a kulcs a 6. állomáson kapott találós kérdés megfejtése
-    if (n === "petofi") {
+    // kulcs: Petőfi (belsőleg "petofi")
+    if (norm === "petofi") {
         window.location.href = "content7.html";
     } else {
-        alert("Hibás kód!");
+        document.getElementById("error").textContent =
+            "Ez most nem nyitotta ki az állomást. Gondoljatok vissza a Szentháromság téren elhangzott találós kérdésre: kinek a neve bújt meg benne?";
     }
 }
 </script>
@@ -100,19 +137,23 @@ function check() {
 
 <body>
 
-<div class="overlay">
-  <div class="container">
-    <h2>7. Ahol papi nem tanított</h2>
+<div class="container">
+    <h2>7. PONT – Ahol papi nem tanított</h2>
 
-    <p>Add meg a kulcsot, amit az előző állomás végén, találós kérdés formájában kaptatok:</p>
+    <p>Aki idáig eljutott, az már találkozott egy különös találós kérdéssel  
+    a Szentháromság téren – egy olyan verssel, amelyről minden magyar  
+    diáknak eszébe jut egy nagyon ismert költő.</p>
 
-    <input id="code" type="text" autocomplete="off" placeholder="Írd be a kulcsot">
-    <button onclick="check()">Tovább</button>
+    <p>Most annak a névnek kell eszetekbe jutnia,  
+    akire a vers, a ló és a „talpra álló” hallgatóság utalt.  
+    Ha jól fejtettétek meg a rejtvényt, tudjátok, kinek a nevét kell beírni.</p>
 
-    <div class="backlink">
-        <a href="index.html">⬅ Vissza a főoldalra</a>
-    </div>
-  </div>
+    <label for="code">Írd be annak a költőnek a nevét,  
+    akiről a találós kérdés szólt:</label>
+    <input id="code" type="text" autocomplete="off" placeholder="Írd ide a nevet">
+    <button class="btn" onclick="check()">➜ Belépés a 7. állomásra</button>
+
+    <div id="error"></div>
 </div>
 
 </body>
