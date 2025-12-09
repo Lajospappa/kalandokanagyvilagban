@@ -9,8 +9,7 @@
 <style>
 body {
     font-family: 'Georgia', serif;
-    background: rgba(0,0,0,0.78) url('szentharomsag.jpg') center/cover no-repeat fixed;
-    background-blend-mode: darken;
+    background: url('szentharomsag.jpg') center/cover no-repeat fixed;
     margin: 0;
     padding: 0;
     color: #f5f2e9;
@@ -19,7 +18,7 @@ body {
 .container {
     max-width: 800px;
     margin: auto;
-    background: rgba(0,0,0,0.70);
+    background: rgba(0,0,0,0.55);   /* világosabb doboz */
     padding: 30px 22px 40px 22px;
     border-radius: 14px;
     margin-top: 24px;
@@ -344,7 +343,6 @@ function setupDistance(buttonId, textId, targetLat, targetLon, label) {
     });
 }
 
-// Koordináták
 // városkapu
 setupDistance("gateBtn", "gateText",
     48.45549688232658, 18.893265659934563, "a városkaputól");
