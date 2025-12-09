@@ -41,6 +41,83 @@ p {
     color: #ffe7a3;
     font-weight: bold;
 }
+
+/* Távolság doboz */
+.distance-box {
+    margin: 15px 0 25px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.45);
+    font-size: 16px;
+    text-align: center;
+}
+.distance-box button {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    margin-bottom: 8px;
+}
+.distance-box button:active {
+    transform: scale(0.98);
+}
+.distance-status {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+/* gombsor */
+.btn-row {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Navigációs gomb – égkék, LENT */
+.nav-btn {
+    display: inline-block;
+    margin: 6px 4px;
+    padding: 9px 18px;
+    background: #68c7ff; /* égkék */
+    color: #033048;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 15px;
+}
+.nav-btn:hover {
+    filter: brightness(1.05);
+}
+
+/* Főoldal gomb */
+.home-btn {
+    display: inline-block;
+    margin: 8px 4px 0 4px;
+    padding: 9px 18px;
+    background: #ffd97f;
+    color: #333;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 16px;
+}
+.home-btn:hover {
+    filter: brightness(1.05);
+}
+
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    body { padding: 15px; }
+    .container { padding: 22px; }
+    h1 { font-size: 26px; }
+    p { font-size: 17px; }
+}
 </style>
 </head>
 
@@ -50,23 +127,12 @@ p {
 
 <h1>Matyi pincéje</h1>
 
-<!-- NAVIGÁCIÓ GOMB -->
-<div style="text-align:center; margin-top:5px; margin-bottom:25px;">
-    <a href="https://maps.app.goo.gl/Pf5SjLUB84LBm3YAA"
-       target="_blank"
-       style="
-           display:inline-block;
-           padding:10px 18px;
-           background:#ffe7a3;
-           color:#333;
-           border-radius:8px;
-           font-weight:bold;
-           font-size:17px;
-           text-decoration:none;
-           box-shadow:0 0 10px rgba(0,0,0,0.3);
-       ">
-       📍 Navigáció ide
-    </a>
+<!-- TÁVOLSÁGMÉRÉS -->
+<div class="distance-box">
+    <button id="startNavBtn">Távolság mérése (GPS)</button>
+    <span id="distanceText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
 </div>
 
 <p>Ahogy kiléptek a Glanzenberg mélyének suttogó történeteiből, most beléptek a 
@@ -91,25 +157,91 @@ annak a neve, amit az oszlopon láttok.
 (A legendák szerint ők sosem tévednek el… ti se tegyétek.)
 </p>
 
+<!-- NAVIGÁCIÓ GOMB – LENT, KÉKEN -->
+<div class="btn-row">
+    <a href="https://maps.app.goo.gl/Pf5SjLUB84LBm3YAA"
+       target="_blank"
+       class="nav-btn">
+       📍 Útvonal a Reštaurácia Matejhez
+    </a>
+</div>
+
 <!-- FŐOLDAL GOMB -->
-<div style="text-align:center; margin-top:35px;">
-    <a href="index.html" 
-       style="
-           display:inline-block;
-           padding:12px 22px;
-           background:#ffd97f;
-           color:#333;
-           border-radius:8px;
-           font-weight:bold;
-           font-size:18px;
-           text-decoration:none;
-           box-shadow:0 0 10px rgba(0,0,0,0.3);
-       ">
+<div class="btn-row">
+    <a href="index.html" class="home-btn">
        ⬅ Főoldal
     </a>
 </div>
 
 </div>
+
+<script>
+// Matyi pincéje – távolságmérés célpontja
+const targetLat = 48.45847681075344;
+const targetLon = 18.896295422685196;
+
+const startBtn = document.getElementById("startNavBtn");
+const distanceText = document.getElementById("distanceText");
+let watchId = null;
+
+// Haversine távolság méterben
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lat2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+function formatDistance(m) {
+    if (m < 5) return "Nagyjából a vendéglőnél vagytok.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m / 1000).toFixed(2) + " km";
+}
+
+function onPosition(pos) {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    const dist = distanceMeters(lat, lon, targetLat, targetLon);
+    distanceText.textContent =
+        "Jelenlegi távolság a vendéglőtől: " + formatDistance(dist);
+}
+
+function onError(err) {
+    distanceText.textContent =
+        "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS és a jogosultság beállításait.";
+}
+
+startBtn.addEventListener("click", function () {
+    if (!("geolocation" in navigator)) {
+        distanceText.textContent =
+            "A böngésző nem támogatja a helymeghatározást.";
+        return;
+    }
+
+    if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        distanceText.textContent = "A távolságmérés szünetel.";
+        startBtn.textContent = "Távolság mérése (GPS)";
+        return;
+    }
+
+    distanceText.textContent = "Helyzet lekérése...";
+    startBtn.textContent = "Mérés leállítása";
+
+    watchId = navigator.geolocation.watchPosition(onPosition, onError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+    });
+});
+</script>
 
 </body>
 </html>
