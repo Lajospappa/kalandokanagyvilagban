@@ -6,7 +6,7 @@
 <style>
 body {
     font-family: 'Georgia', serif;
-    background: url('ovar.jpg') center/cover no-repeat fixed;
+    background: url('óvárháttér.jpg') center/cover no-repeat fixed;
     color: #f5f5f5;
     padding: 40px;
     margin: 0;
@@ -183,18 +183,15 @@ Néhánnyal már találkoztatok az előző állomásokon, de most nem a történ
 hanem a <span class="highlight">nevük első betűjére</span> lesz szükség.</p>
 
 <p>Feladat:</p>
+
 <p>
-1. Nézzétek végig a tornyos épületeket <span class="highlight">balról jobbra</span>,  
-vagyis <span class="highlight">nyugatról kelet felé</span> haladva.<br>
-2. Mindegyiknél mondjátok ki, melyik épület, és írjátok le magatoknak a nevét –  
-de ide a feladathoz ne írjátok le, ez maradjon a saját jegyzetetekben.<br>
-3. Vegyétek minden névnek az <span class="highlight">első betűjét</span> ebben a sorrendben.<br>
-4. Öt betűt kell kapnotok. Ez az öt kezdőbetű lesz a kódsorotok.
+1. Figyeljétek meg azokat a tornyos épületeket, amelyek a látványban leginkább kiemelkednek erről a pontról.<br>
+2. Állapodjatok meg egymás között egy sorrendben, ahogy ezeket az épületeket felsorolnátok.<br>
+3. Vegyétek ezeknek a neveknek az <span class="highlight">első betűjét</span> ebben a saját sorrendben.<br>
+4. Öt betűt kell kapnotok – ezekből fogtok majd egy pásztorkutya-nevet kirakni.
 </p>
 
-<p>Most ezt az öt betűt kell majd beillesztenetek a következő szórejtvény üres helyeire.</p>
-
-<h2>A feladvány: mit őriznek a hegyek?</h2>
+<h2>A feladvány</h2>
 
 <p>Selmecbánya környékén régen nem csak bányászok és diákok jártak:  
 a felvidéki hegyek <span class="highlight">juhnyájait</span> is őrizni kellett.  
@@ -202,11 +199,7 @@ A helyiek szerint az ősi magyar <span class="highlight">fehér pásztorkutyák<
 épp olyan elszántan vigyázták a nyájat, mint ahogy a várőrök figyelték a völgyet.</p>
 
 <p>Az öt betűt, amit a tornyokból szereztetek,  
-ide kell beleképzelnetek, a hiányzó helyekre:</p>
-
-<p class="highlight" style="font-size:20px; text-align:center; margin-top:15px;">
-megsz _ _ a _ zo _
-</p>
+a lenti <span class="highlight">szórejtvény</span> üres helyeire kell elképzelnetek.</p>
 
 <img src="kuvaszok.jpg" alt="Szórejtvény – pásztorkutya" class="photo">
 
@@ -239,7 +232,7 @@ function distanceMeters(lat1, lon1, lat2, lon2) {
     const R = 6371000;
     const toRad = x => x * Math.PI / 180;
     const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
+    const dLon = toRad(lat2 - lon1);
     const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
