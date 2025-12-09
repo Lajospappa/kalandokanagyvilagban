@@ -43,10 +43,69 @@ p {
     font-size: 19px;
 }
 
+/* Cím */
+h1 {
+    text-align:center;
+    color:#ffe7a3;
+    margin-bottom: 25px;
+}
+
+/* Távolság doboz */
+.distance-box {
+    margin: 10px 0 25px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    font-size: 16px;
+    text-align: center;
+}
+.distance-box button {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    margin-bottom: 8px;
+}
+.distance-box button:active {
+    transform: scale(0.98);
+}
+.distance-status {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+/* gombsor */
+.btn-row {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Navigációs gomb – égkék, lentre */
+.nav-btn {
+    display: inline-block;
+    margin: 6px 4px;
+    padding: 9px 18px;
+    background: #68c7ff;
+    color: #033048;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 15px;
+}
+.nav-btn:hover {
+    filter: brightness(1.05);
+}
+
 /* Főoldal gomb */
 .home {
     display:inline-block;
-    margin-top:25px;
+    margin-top:12px;
     padding:12px 20px;
     background:#ffe7a3;
     color:#333;
@@ -54,12 +113,20 @@ p {
     border-radius:8px;
     text-decoration:none;
     box-shadow:0 0 10px rgba(255,231,163,0.5);
+    font-size:16px;
+}
+.home:hover {
+    filter: brightness(1.05);
 }
 
-h1 {
-    text-align:center;
-    color:#ffe7a3;
-    margin-bottom: 25px;
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    .container {
+        margin-top: 15px;
+        padding: 22px;
+    }
+    p { font-size: 17px; }
+    h1 { font-size: 26px; }
 }
 </style>
 </head>
@@ -69,6 +136,14 @@ h1 {
 <div class="container">
 
 <h1>Úrnő palotája</h1>
+
+<!-- TÁVOLSÁGMÉRÉS -->
+<div class="distance-box">
+    <button id="startNavBtn">Távolság mérése (GPS)</button>
+    <span id="distanceText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
 
 <p><span class="initial">B</span>ár az Újvár falai a 16. században épültek fel, amikor Selmecbánya a törökök árnyékában védelemre szorult, a kőből rakott bástyák még ma is őrzik a hajdani őrszemek lépéseinek emlékét. A vár magasról tekint a városra, mint aki nemcsak a múlt felett vigyáz, hanem a benne megbújó történeteket is óvja.</p>
 
@@ -84,9 +159,89 @@ h1 {
 
 <p><span class="initial">A</span> mai napig mondják a helyiek: aki elég figyelmesen jár az Újvár körül, az nemcsak a történeteket találja meg, hanem azt a rejtett kulcsot is, amely ott van a sorok elején. Aki látja, annak megnyílik a következő kapu. A többieknek pedig érdemes újra elolvasni a történetet – hiszen néha a legfontosabb dolgok csendben bújnak el.</p>
 
-<a href="index.html" class="home">⬅ Főoldal</a>
+<!-- NAVIGÁCIÓ – LENT KÉKKEL -->
+<div class="btn-row">
+    <a href="https://maps.app.goo.gl/Gbgae78CLL6fsxVz8"
+       target="_blank"
+       class="nav-btn">
+        📍 Útvonal az Újvárhoz
+    </a>
+</div>
+
+<!-- FŐOLDAL GOMB -->
+<div class="btn-row">
+    <a href="index.html" class="home">⬅ Főoldal</a>
+</div>
 
 </div>
+
+<script>
+// Újvár – távolságmérés célpontja
+const targetLat = 48.45588159857155;
+const targetLon = 18.896004229805616;
+
+const startBtn = document.getElementById("startNavBtn");
+const distanceText = document.getElementById("distanceText");
+let watchId = null;
+
+// Haversine távolság méterben
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+function formatDistance(m) {
+    if (m < 5) return "Nagyjából az Újvárnál vagytok.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m / 1000).toFixed(2) + " km";
+}
+
+function onPosition(pos) {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    const dist = distanceMeters(lat, lon, targetLat, targetLon);
+    distanceText.textContent =
+        "Jelenlegi távolság az Újvártól: " + formatDistance(dist);
+}
+
+function onError(err) {
+    distanceText.textContent =
+        "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS és a jogosultság beállításait.";
+}
+
+startBtn.addEventListener("click", function () {
+    if (!("geolocation" in navigator)) {
+        distanceText.textContent =
+            "A böngésző nem támogatja a helymeghatározást.";
+        return;
+    }
+
+    if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        distanceText.textContent = "A távolságmérés szünetel.";
+        startBtn.textContent = "Távolság mérése (GPS)";
+        return;
+    }
+
+    distanceText.textContent = "Helyzet lekérése...";
+    startBtn.textContent = "Mérés leállítása";
+
+    watchId = navigator.geolocation.watchPosition(onPosition, onError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+    });
+});
+</script>
 
 </body>
 </html>
