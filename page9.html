@@ -107,14 +107,15 @@ input[type="text"] {
 
 <script>
 function check() {
-    var v = document.getElementById("code").value.trim();
+    var v = document.getElementById("code").value.trim().toLowerCase();
 
-    // a Luther-rózsa házszáma nyitja az utolsó kincset
-    if (v === "10") {
+    // A 8. pontnál megfejtett magyar fehér pásztorkutya neve
+    if (v === "kuvaszok") {
+        // Luther-rózsa tartalom – nálad ez a content10.html
         window.location.href = "content10.html";
     } else {
         document.getElementById("error").textContent =
-            "Ez most nem nyitja ki az utolsó kincs kapuját. Gondoljatok vissza: melyik ház falán láttátok a Luther-rózsát, és milyen házszám áll mellette?";
+            "Ez most nem nyitja a Luther-rózsához vezető fejezetet. Gondoljatok vissza: milyen magyar fehér pásztorkutya nevét raktátok ki a vár tornyainak rejtvényéből?";
     }
 }
 </script>
@@ -125,17 +126,20 @@ function check() {
 <div class="container">
     <h2>9. PONT – Luther rózsája</h2>
 
-    <p>Csak az tud továbbmenni, aki a Dolná ružová utcácska elején  
-    figyelmesen megkereste az evangélikusok házát,  
-    és meglátta a homlokzaton a Luther-rózsát.</p>
+    <p>Az Óvár tornyai között már megfejtettetek egy rejtélyt:  
+    egy ősi magyar <strong>fehér pásztorkutya</strong> nevét raktátok ki  
+    a város fölé magasodó tornyok segítségével.</p>
 
-    <p>Most arra az egyetlen adatra lesz szükségetek,  
-    ami már ott állt a falon, csak le kellett olvasni: a <strong>házszámra</strong>.</p>
+    <p>Most ez a név lesz a kulcs ahhoz, hogy beléphessetek  
+    a <strong>Dolná ružová</strong> utcácska titkos fejezetébe,  
+    ahol a Luther-rózsa egy különös ház faláról figyel benneteket.</p>
 
-    <label for="code">Írd be annak a háznak a <strong>házszámát</strong>,  
-    amelynek falán a Luther-róznąt találtátok:</label>
-    <input id="code" type="text" autocomplete="off" inputmode="numeric" placeholder="Házszám">
-    <button class="btn" onclick="check()">➜ Belépés az utolsó kincshez</button>
+    <p>Ha emlékeztek a rejtvény megoldására, már csak be kell írnotok ide.</p>
+
+    <label for="code">Írd be annak az ősi magyar fehér pásztorkutyának a nevét,  
+    amelyet a 8. pont tornyainak rejtvényéből raktatok ki:</label>
+    <input id="code" type="text" autocomplete="off" placeholder="Pásztorkutya neve">
+    <button class="btn" onclick="check()">➜ Belépés a Luther-rózsához</button>
 
     <div id="error"></div>
 </div>
