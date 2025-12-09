@@ -2,24 +2,30 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Glanzenberg-tárna</title>
+<title>3. PONT – Út a város szívébe (Glanzenberg-tárna)</title>
+
+<!-- Mobiloptimalizálás -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
     font-family: 'Georgia', serif;
     background: url('tarna.png') center/cover no-repeat fixed;
     color: #f5f5f5;
-    padding: 40px;
+    padding: 20px;
+    margin: 0;
 }
 
 .container {
     max-width: 700px;
     margin: auto;
     background: rgba(0,0,0,0.65);
-    padding: 35px;
+    padding: 30px;
     border-radius: 14px;
     box-shadow: 0 0 25px rgba(0,0,0,0.6);
 }
 
+/* Cím */
 h1 {
     font-size: 32px;
     margin-bottom: 15px;
@@ -27,14 +33,93 @@ h1 {
     color: #ffe7a3;
 }
 
+/* Szöveg */
 p {
     line-height: 1.6;
     font-size: 18px;
+    margin-bottom: 14px;
 }
 
 .highlight {
     color: #ffe7a3;
     font-weight: bold;
+}
+
+/* Távolság doboz */
+.distance-box {
+    margin: 10px 0 20px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.45);
+    font-size: 16px;
+    text-align: center;
+}
+.distance-box button {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    margin-bottom: 8px;
+}
+.distance-box button:active {
+    transform: scale(0.98);
+}
+.distance-status {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+/* gombsor */
+.btn-row {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Navigációs gomb – égkék (lap alján) */
+.nav-btn {
+    display: inline-block;
+    margin: 6px 4px;
+    padding: 9px 18px;
+    background: #68c7ff; /* égkék */
+    color: #033048;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 15px;
+}
+.nav-btn:hover {
+    filter: brightness(1.05);
+}
+
+/* Főoldal gomb */
+.home-btn {
+    display: inline-block;
+    margin: 8px 4px 0 4px;
+    padding: 9px 18px;
+    background: #ffe7a3;
+    color: #333;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 15px;
+}
+.home-btn:hover {
+    filter: brightness(1.05);
+}
+
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .container { padding: 22px; }
+    h1 { font-size: 26px; }
+    p { font-size: 17px; }
 }
 </style>
 </head>
@@ -43,9 +128,17 @@ p {
 
 <div class="container">
 
-<h1>Glanzenberg-tárna<br><span style="font-size:20px;">A hely, ahol még a hegy is történelmet súg</span></h1>
+<h1>3. PONT – Út a város szívébe<br><span style="font-size:20px;">Glanzenberg-tárna</span></h1>
 
-<p>A Glanzenberg-tárna Selmecbánya egyik legősibb és legmesésebb bányája.  
+<!-- TÁVOLSÁGMÉRÉS -->
+<div class="distance-box">
+    <button id="startNavBtn">Távolság mérése (GPS)</button>
+    <span id="distanceText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
+
+<p>A <span class="highlight">Glanzenberg-tárna</span> Selmecbánya egyik legősibb és legmesésebb bányája.  
 A falak még mindig őrzik a csákányok ritmusát, a bányászok dalait,  
 és azt a fajta büszke csendet, amit csak a hegy gyomrában lehet megtapasztalni.</p>
 
@@ -66,7 +159,7 @@ Nem harsány, nem világít LED-fénnyel, de ott van, kőbe vésve, ahogy illik.
 <h2 style="color:#ffe7a3; text-align:center; margin-top:30px;">Feladat</h2>
 
 <p>Keressétek meg ezt a táblát,  
-és fejtsetek meg róla egy évszámot.</p>
+és fejtsetek meg róla egy <span class="highlight">évszámot</span>.</p>
 
 <p>Ez annak az évnek a száma,  
 <span class="highlight">amikor a nagybajuszú úr meglátogatta a tárnát</span>.</p>
@@ -85,7 +178,90 @@ Aki tudja, <span class="highlight">kinek a kilátóhelye</span> van a Großglock
 az a kódot is meg fogja találni.
 </p>
 
+<!-- NAVIGÁCIÓS GOMB – LAP ALJÁN -->
+<div class="btn-row">
+    <a href="https://maps.app.goo.gl/ZBj2kDkzA6FSphBV8" 
+       target="_blank" 
+       class="nav-btn">
+        📍 Útvonal a Glanzenberg-tárnához
+    </a>
 </div>
+
+<!-- FŐOLDAL GOMB -->
+<div class="btn-row">
+    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+</div>
+
+</div>
+
+<script>
+// Glanzenberg-tárna távolságmérés célpontja
+const targetLat = 48.45706942700705;
+const targetLon = 18.90034850486971;
+
+const startBtn = document.getElementById("startNavBtn");
+const distanceText = document.getElementById("distanceText");
+let watchId = null;
+
+// Haversine távolság méterben
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+function formatDistance(m) {
+    if (m < 5) return "Nagyjából a tárna bejáratánál vagy.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m / 1000).toFixed(2) + " km";
+}
+
+function onPosition(pos) {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    const dist = distanceMeters(lat, lon, targetLat, targetLon);
+    distanceText.textContent =
+        "Jelenlegi távolság a tárna bejáratától: " + formatDistance(dist);
+}
+
+function onError(err) {
+    distanceText.textContent =
+        "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS és a jogosultság beállításait.";
+}
+
+startBtn.addEventListener("click", function () {
+    if (!("geolocation" in navigator)) {
+        distanceText.textContent =
+            "A böngésző nem támogatja a helymeghatározást.";
+        return;
+    }
+
+    if (watchId !== null) {
+        // már fut, leállítjuk
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        distanceText.textContent = "A távolságmérés szünetel.";
+        startBtn.textContent = "Távolság mérése (GPS)";
+        return;
+    }
+
+    distanceText.textContent = "Helyzet lekérése...";
+    startBtn.textContent = "Mérés leállítása";
+
+    watchId = navigator.geolocation.watchPosition(onPosition, onError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+    });
+});
+</script>
 
 </body>
 </html>
