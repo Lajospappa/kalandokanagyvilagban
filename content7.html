@@ -2,28 +2,242 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Vár ahonnan minden torony látszik - Kód bekérés</title>
-<script>
-function check() {
-    var v = document.getElementById("code").value.trim();
-    if (v === "1838") {
-        window.location.href = "content8.html";
-    } else {
-        alert("Hibás kód!");
+<title>7. PONT – Ahol papi nem tanított</title>
+
+<!-- Mobil optimalizálás -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: 'Georgia', serif;
+    background: url('aterkepe.jpeg') center/cover no-repeat fixed;
+    color: #f5f5f5;
+    padding: 40px;
+    margin: 0;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+    background: rgba(0,0,0,0.65);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #ffe7a3;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+
+.highlight {
+    color: #ffe7a3;
+    font-weight: bold;
+}
+
+/* Távolságmérés doboz */
+.distance-box {
+    margin: 20px 0 30px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+    text-align: center;
+}
+.distance-box button {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    margin-bottom: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.distance-box button:active {
+    transform: scale(0.98);
+}
+.distance-status {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+/* Főoldal gomb */
+.home-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #ffe7a3;
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    font-size: 17px;
+}
+
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
+    }
+    .container {
+        padding: 22px 16px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 17px;
     }
 }
-</script>
+</style>
 </head>
 
 <body>
+<div class="container">
 
-<h2>8. PONT – Vár ahonnan minden torony látszik</h2>
+<h1>7. PONT – Ahol papi nem tanított</h1>
 
-<p>Add meg azt az évszámot, amit a líceum falán lévő emléktáblán olvastatok:  
-azt az évet, amikor <strong>Petőfi</strong> selmecbányai diákéve elkezdődött.</p>
+<div class="distance-box">
+    <button id="startNavBtn">Távolság mérése (GPS)</button>
+    <span id="distanceText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok a líceumtól.
+    </span>
+</div>
 
-<input id="code" type="text" autocomplete="off">
-<button onclick="check()">Tovább</button>
+<p>A következő állomásnál nem egy bányajárat, nem egy kocsma és nem is egy torony vár rátok,  
+hanem a város egyik legfontosabb <span class="highlight">iskolája</span>.  
+Ez az a hely, ahol a könyvek, a viták és a titokban álmodott versek csendben formálták  
+a fiatal diákok fejét és szívét.</p>
+
+<p>A líceum falai között tanult egy fiú is, aki akkor még nem volt több a sok diák egyikénél.  
+Szegényes ruhában járt, gyakran küzdött az anyagi gondokkal,  
+de a fejében már akkor is történetek, képek és rímek kavarogtak.  
+Később egész országok ismerték meg a nevét,  
+de itt még csak egy tehetséges, makacs, élénk képzeletű diák volt,  
+aki nem mindig illett bele az iskolai szabályok szűk kereteibe.</p>
+
+<p>A kor tanítói közül többen inkább a fegyelmet és a rendet szerették,  
+mint a szárnyaló fantáziát. Nem csoda, ha a fiú hol hálás szívvel,  
+hol szorongással gondolt vissza a tanórákra.  
+Később úgy mesélték róla, hogy amit igazán tanult,  
+azt nem csak a padban ülve, hanem a város utcáin,  
+a hegyek között és a diáktársai között szívta magába.</p>
+
+<p>A líceumban működött egy különleges társaság is,  
+amely a magyar nyelvet, irodalmat és gondolkodást ápolta.  
+Ebben a körben a fiatal diák végre otthon érezte magát:  
+itt nem elfojtani kellett a gondolatokat, hanem kimondani, megbeszélni,  
+papírra vetni. Ha úgy tetszik, itt kezdett igazán azzá válni,  
+akit ma már mindenki ismer.</p>
+
+<p>A főhomlokzat egyik fontos részén egy <span class="highlight">emléktábla</span> őrzi,  
+hogy ez a bizonyos diák itt töltötte tanéveinek egy részét,  
+és hogy egy diáktársaság tagjaként is élénk szerepet vállalt.  
+A tábla csendben lóg a falon, de aki tud olvasni a sorok között,  
+annak nem csak egy név és egy tanév látszik rajta,  
+hanem egy egész életpálya kezdete.</p>
+
+<p>Ti most nem a teljes történetet kell, hogy megfejtsétek,  
+csak egy apró, de fontos részletet.</p>
+
+<p class="highlight" style="font-size:19px; text-align:center; margin-top:24px;">
+Keressétek meg az emléktáblát a líceum falán,  
+és jegyezzétek fel a rajta szereplő tanév kezdő évszámát.
+</p>
+
+<p style="text-align:center; margin-top:10px;">
+Erre az évszámra lesz szükségetek,<br>
+hogy kinyissátok a következő állomást:<br>
+<span class="highlight">„Vár ahonnan minden torony látszik”.</span>
+</p>
+
+<div style="text-align:center; margin-top:28px;">
+    <a href="index.html" class="home-btn">⬅ Vissza a Főoldalra</a>
+</div>
+
+</div>
+
+<script>
+// Célpont: a líceum közelében lévő pont
+const targetLat = 48.46062927377808;
+const targetLon = 18.892079876013412;
+
+const startBtn = document.getElementById("startNavBtn");
+const distanceText = document.getElementById("distanceText");
+let watchId = null;
+
+// Haversine-távolság méterben
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000; // Föld sugara méterben
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+function formatDistance(m) {
+    if (m < 5)  return "Nagyjából a líceumnál vagytok.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m / 1000).toFixed(2) + " km";
+}
+
+function onPosition(pos) {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    const dist = distanceMeters(lat, lon, targetLat, targetLon);
+    distanceText.textContent =
+        "Jelenlegi távolság a líceumtól: " + formatDistance(dist);
+}
+
+function onError(err) {
+    distanceText.textContent =
+        "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS-t és a jogosultságokat.";
+}
+
+startBtn.addEventListener("click", function () {
+    if (!("geolocation" in navigator)) {
+        distanceText.textContent =
+            "A böngésző nem támogatja a helymeghatározást.";
+        return;
+    }
+
+    // ha már fut, állítsuk le
+    if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        distanceText.textContent = "A távolságmérés szünetel.";
+        startBtn.textContent = "Távolság mérése (GPS)";
+        return;
+    }
+
+    distanceText.textContent = "Helyzet lekérése...";
+    startBtn.textContent = "Mérés leállítása";
+
+    watchId = navigator.geolocation.watchPosition(onPosition, onError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+    });
+});
+</script>
 
 </body>
 </html>
