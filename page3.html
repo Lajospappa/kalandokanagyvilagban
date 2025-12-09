@@ -2,27 +2,99 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Út a város szívébe - Kód bekérés</title>
-<script>
-function check() {
-    var v = document.getElementById("code").value.trim();
-    if (v === "22740") {
-        window.location.href = "content3.html";
-    } else {
-        alert("Hibás kód!");
+<title>Út a város szívébe – Belépés</title>
+
+<!-- Mobil optimalizálás -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: 'Georgia', serif;
+    background: url('tarna.png') center/cover no-repeat fixed;
+    margin: 0;
+    padding: 0;
+    color: #f5f5f5;
+}
+
+/* középső doboz */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 24px 20px 30px 20px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+/* cím */
+h2 {
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 14px;
+    text-align: center;
+    color: #ffe7a3;
+}
+
+/* szöveg */
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* gomb */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: inherit;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    .container {
+        margin: 20px 10px;
+        padding: 20px 14px 24px 14px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    p, .btn {
+        font-size: 17px;
     }
 }
-</script>
+</style>
 </head>
 
 <body>
 
-<h2>Út a város szívébe</h2>
+<div class="container">
+    <h2>3. PONT – Út a város szívébe</h2>
 
-<p>Add meg a kulcsot:</p>
+    <p>A hegy gyomrában futó régi bányajárat, a Glanzenberg-tárna  
+    Selmecbánya egyik legmélyebb titkát rejti.  
+    Ha készen álltok arra, hogy tovább kövessétek a város szívébe vezető utat,  
+    lépjetek be a tárna történetének állomására.</p>
 
-<input id="code" type="text" autocomplete="off">
-<button onclick="check()">Tovább</button>
+    <button class="btn" onclick="window.location.href='content3.html'">
+        ➜ Belépés a Glanzenberg-tárna állomásra
+    </button>
+</div>
 
 </body>
 </html>
