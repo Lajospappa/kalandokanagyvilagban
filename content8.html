@@ -50,6 +50,50 @@ h2 {
     box-shadow: 0 0 18px rgba(0,0,0,0.7);
 }
 
+/* Navigációs gomb – kék */
+.navbtn {
+    display:inline-block;
+    margin: 8px 0 10px 0;
+    padding: 8px 14px;
+    background:#68c7ff;
+    color:#033048;
+    font-weight:bold;
+    font-size:14px;
+    border-radius:7px;
+    text-decoration:none;
+    box-shadow:0 0 8px rgba(0,0,0,0.4);
+}
+
+/* Távolság doboz */
+.distance-box {
+    margin: 8px 0 22px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+    text-align: center;
+}
+.distance-box button {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    margin-bottom: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+.distance-box button:active {
+    transform: scale(0.98);
+}
+.distance-status {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+}
+
 /* Főoldal gomb */
 .home-btn {
     display: inline-block;
@@ -68,6 +112,22 @@ h2 {
     text-align: center;
     margin-top: 10px;
 }
+
+/* mobil finomhangolás */
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
+    }
+    .container {
+        padding: 22px 16px;
+    }
+    h1 {
+        font-size: 26px;
+    }
+    p {
+        font-size: 17px;
+    }
+}
 </style>
 </head>
 
@@ -75,6 +135,17 @@ h2 {
 <div class="container">
 
 <h1>8. PONT – Vár ahonnan minden torony látszik</h1>
+
+<a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" target="_blank" class="navbtn">
+    📍 Navigáció az Óvár kapujához
+</a>
+
+<div class="distance-box">
+    <button id="distBtn">Távolság mérése (GPS)</button>
+    <span id="distText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok az Óvártól.
+    </span>
+</div>
 
 <p>Az <span class="highlight">Óvár</span>, vagyis a régi vár Selmecbánya egyik legősibb őrhelye.  
 Első pillantásra inkább tűnik templomnak, mint klasszikus várnak – nem véletlenül:  
@@ -103,33 +174,22 @@ egy igazi „kőből faragott időutazás”.</p>
 de ne lépjetek még be. A kapuval szembefordulva, a tér felé nézve  
 álljatok meg az <span class="highlight">első kandellábernél</span> (az első lámpaoszlopnál).</p>
 
-<p>Innen, ha a városra néztek, egy különleges panoráma tárul elétek:  
-<em>egy sor tornyos épület</em>, amelyek közül négy igazán szépen kirajzolódik egymás mögött.</p>
+<p>Innen, ha a városra néztek, egy nagyon különleges panoráma tárul elétek:  
+a bányaváros fölött néhány jellegzetes <span class="highlight">tornyos épület</span> emelkedik ki.  
+Ezek közül négyet már jól ismertek az előző állomásokról – de most ne a történetükre,  
+hanem a <span class="highlight">nevük első betűjére</span> figyeljetek.</p>
 
 <h2>Tornyok, mint rejtett betűk</h2>
 
-<p>A feladatotok az, hogy <span class="highlight">nyugatról kelet felé</span> figyeljétek meg a látképet,  
-és sorban azonosítsátok a legjellegzetesebb tornyos épületeket.  
-A tornyokhoz tartozó épületek kezdőbetűi adják a kódsor alapját:</p>
+<p>A feladatotok az, hogy <span class="highlight">nyugatról kelet felé</span> végignézzétek a látképet,  
+és sorban azonosítsátok azokat a tornyos épületeket, amelyek a leginkább „uralkodnak” a város felett.  
+Mindegyikkel találkoztatok már: volt köztük olyan ház, ahol kopogó hang ébresztette a bányászokat,  
+volt hegytetőn álló erőd, városi tanácskozó hely, templom és a dombtetőn magasodó szent hely.</p>
 
-<p>
-<span class="highlight">K</span> – Kopogtató ház (Klopaczka, a régi bányász-ébredőtorony)  
-<br>
-<span class="highlight">U</span> – Újvár (a másik hegyen álló őrtorony  
-<br>
-<span class="highlight">V</span> – Városháza tornya  
-<br>
-<span class="highlight">S</span> – Szent Katalin templom tornya  
-<br>
-<span class="highlight">K</span> – Kálvária a domb tetején
-</p>
-
-<p>Ha jól nézitek a panorámát, ezek a tornyok kirajzolják az útvonalat a bányaváros lelke fölött.  
-A kezdőbetűkből egy betűsort kaptok, amely így néz ki:</p>
-
-<p class="highlight" style="font-size:20px; text-align:center; margin-top:20px;">
-K – U – V – S – K
-</p>
+<p>Írjátok le magatoknak ezeknek az épületeknek a nevét,  
+majd vegyétek a kezdőbetűiket <span class="highlight">nyugatról kelet felé</span> haladva.  
+Így kaptok egy ötbetűs betűsort. Ezt most még ne alakítsátok át szóra,  
+csak őrizzétek meg – a következő rejtvényben lesz rá szükségetek.</p>
 
 <h2>A feladvány: mit őriznek a hegyek?</h2>
 
@@ -138,11 +198,17 @@ a felvidéki hegyek <span class="highlight">juhnyájait</span> is őrizni kellet
 A helyiek szerint az ősi magyar <span class="highlight">fehér pásztorkutyák</span>  
 épp olyan elszántan vigyázták a nyájat, mint ahogy a várőrök figyelték a völgyet.</p>
 
-<p>A betűsorotok tehát: <span class="highlight">K U V S K</span>.  
-Ha egy kicsit tovább gondolkodtok, és „megszánjátok” ezt az öt betűt néhány magánhangzóval,  
-egy híres magyar pásztorkutya neve rajzolódik ki belőlük.  
-Ez a kutyafajta őrizte egykor a felvidéki hegyek juhait –  
-és most a ti következő kincsetek <em>jelszavát</em> is őrzi.</p>
+<p>Később majd egy ilyen szövegrészben lesz dolgotok a saját betűsorotokkal:</p>
+
+<p class="highlight" style="font-size:20px; text-align:center; margin-top:15px;">
+megsz _ _ a _ zo _
+</p>
+
+<p style="margin-top:10px;">
+A feladat az lesz, hogy a hiányzó helyekre a most megszerzett öt betűt  
+kell ügyesen beillesztenetek. Ha jól dolgoztok,  
+egy <span class="highlight">ősi magyar fehér pásztorkutya</span> neve fog kirajzolódni belőle –  
+ugyanaz a fajta, amelyről azt mondják, hogy a felvidéki hegyek juhnyájait is őrizte.</p>
 
 <p class="highlight" style="font-size:20px; text-align:center; margin-top:25px;">
 A 9. pont, a „Luther rózsája” kapuját<br>
@@ -154,5 +220,59 @@ ennek a magyar fehér pásztorkutyának a neve nyitja.
 </div>
 
 </div>
+
+<script>
+// Óvár kapujának közelében lévő pont
+const targetLat = 48.459336407159405;
+const targetLon = 18.891808326726757;
+
+const distBtn  = document.getElementById("distBtn");
+const distText = document.getElementById("distText");
+
+// Haversine-távolság méterben
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+function formatDistance(m) {
+    if (m < 5)  return "Nagyjából az Óvár kapujánál vagytok.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m / 1000).toFixed(2) + " km";
+}
+
+distBtn.addEventListener("click", function () {
+    if (!("geolocation" in navigator)) {
+        distText.textContent = "A böngésző nem támogatja a helymeghatározást.";
+        return;
+    }
+
+    distText.textContent = "Helyzet lekérése...";
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        const dist = distanceMeters(lat, lon, targetLat, targetLon);
+        distText.textContent =
+            "Jelenlegi távolság az Óvártól: " + formatDistance(dist);
+    }, function (err) {
+        distText.textContent =
+            "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS és a jogosultság beállításait.";
+    }, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+    });
+});
+</script>
+
 </body>
 </html>
