@@ -54,18 +54,46 @@ p {
     box-shadow: 0 0 16px rgba(0,0,0,0.6);
 }
 
-/* Navigációs gombok */
+/* Navigációs gombok – ÉGSZÍNKÉK */
 .navbtn {
     display:inline-block;
-    margin: 8px 0 16px 0;
+    margin: 8px 0 6px 0;
     padding: 8px 14px;
-    background:#ffe7a3;
-    color:#333;
+    background:#68c7ff;
+    color:#033048;
     font-weight:bold;
     font-size:14px;
     border-radius:7px;
     text-decoration:none;
     box-shadow:0 0 8px rgba(0,0,0,0.4);
+}
+
+/* Távolság doboz minden ponthoz */
+.distance-box {
+    margin: 4px 0 16px 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.45);
+    font-size: 15px;
+}
+.distance-box button {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    margin-bottom: 4px;
+}
+.distance-box button:active {
+    transform: scale(0.98);
+}
+.distance-status {
+    display: block;
+    margin-top: 2px;
+    font-size: 14px;
 }
 
 /* Főoldal gomb */
@@ -80,6 +108,17 @@ p {
     text-decoration:none;
     box-shadow:0 0 12px rgba(0,0,0,0.6);
     font-size:17px;
+}
+
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    .container {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 22px 16px 30px 16px;
+    }
+    p { font-size: 17px; }
+    h1 { font-size: 25px; }
 }
 </style>
 </head>
@@ -108,6 +147,13 @@ p {
 
 <a href="https://maps.app.goo.gl/U4uNewB8FCkMtWG28" target="_blank" class="navbtn">📍 Navigáció a városkapuhoz</a>
 
+<div class="distance-box">
+    <button id="gateBtn">Távolság mérése (GPS)</button>
+    <span id="gateText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
+
 <p>Ahogy lejjebb értek a hegyről, egy régi kapu maradványa fogad: ez a <strong>városkapu</strong>, Selmecbánya egykori falrendszerének fontos része. A 16. században erősítették meg, amikor a török támadások egyre nagyobb fenyegetést jelentettek, és a bányavárost kőből rakott pajzsként vették körül a falak.</p>
 
 <p>A kapun át haladtak be a teherrel érkező szekerek, a kereskedők, a diákok és a bányászfalvakból érkező munkások. Ma már inkább csak emlékeztet arra, hogy aki itt belép, nem egy átlagos kisváros utcáira érkezik, hanem egy olyan helyre, ahol az arany és ezüst egyszer egész Európa történetét mozgatta.</p>
@@ -118,6 +164,13 @@ p {
 <img src="Klopacska.jpg" alt="Klopacska, a Kopogtató Ház" class="section-image">
 
 <a href="https://maps.app.goo.gl/6QeHAt8cPnbpb4Ed6" target="_blank" class="navbtn">📍 Navigáció a Klopačkához</a>
+
+<div class="distance-box">
+    <button id="klopBtn">Távolság mérése (GPS)</button>
+    <span id="klopText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
 
 <p>Tovább sétálva eléritek a <strong>Kopogtató házat</strong>, vagy ahogy a helyiek emlegetik, a Klopačka tornyot. Első pillantásra kedves, régi ház, ma teázó, de a múltja sokkal keményebb: itt szó szerint „lekopogták” a bányászok napját.</p>
 
@@ -132,6 +185,13 @@ p {
 
 <a href="https://maps.app.goo.gl/dJjbyZMbzzJGRths9" target="_blank" class="navbtn">📍 Navigáció a Városházához</a>
 
+<div class="distance-box">
+    <button id="varoshazaBtn">Távolság mérése (GPS)</button>
+    <span id="varoshazaText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
+
 <p>A séta következő állomása a <strong>Városháza</strong>. Az épület középkori magja a 14. századig nyúlik vissza, mai barokk formáját a 18. századi átépítések során nyerte el. Falai között évszázadokon át itt hozták a döntéseket bányajogról, kereskedelemről, adókról és a város mindennapi életéről.</p>
 
 <p>A legtöbb látogatónak azonban azonnal az tűnik fel, hogy a torony órája „furcsán” működik: <strong>a nagy mutató az órát, a kicsi a perceket mutatja</strong>. Egy magyarázat szerint a hegyoldalról, messziről néző bányászok és polgárok számára az volt a lényeg, hogy nagy vonalakban tudják, hány óra van, a percek csak másodlagosak voltak – ezért lett nagyobb az óramutató.</p>
@@ -145,6 +205,13 @@ p {
 
 <a href="https://maps.app.goo.gl/1yGmxVYssquJUeRy7" target="_blank" class="navbtn">📍 Navigáció a Szent Katalin templomhoz</a>
 
+<div class="distance-box">
+    <button id="katalinBtn">Távolság mérése (GPS)</button>
+    <span id="katalinText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
+
 <p>A Városháza mellett emelkedik a <strong>Szent Katalin templom</strong>, amelyet a 15. század végén, késő gótikus stílusban építettek. A 17. századtól a város „nem német” ajkú lakossága – szlovákok, magyarok – is itt talált magának lelki otthont, ezért gyakran nevezték a polgárok templomának.</p>
 
 <p>Védőszentje, <strong>Alexandriai Szent Katalin</strong> a hagyomány szerint művelt, bátor fiatal nő volt, aki a császár udvarában vitába szállt a birodalom filozófusaival, és hite mellett kitartva szenvedett mártírhalált. A bányászok, diákok és tanítók számára Katalin egyszerre jelképezte a bölcsességet és a lelki szilárdságot. Selmecbánya világában – ahol a bányászat mögött mindig ott állt a tudomány és az akadémia szelleme – ez nagyon is érthető választás.</p>
@@ -155,6 +222,13 @@ p {
 <img src="lovebank.jpg" alt="Love Bank Selmecbányán" class="section-image">
 
 <a href="https://maps.app.goo.gl/gtjbmpRjASEMawku5" target="_blank" class="navbtn">📍 Navigáció a Love Bankhoz</a>
+
+<div class="distance-box">
+    <button id="loveBtn">Távolság mérése (GPS)</button>
+    <span id="loveText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
 
 <p>Ahogy továbbmentek, elérkeztek a <strong>Love Bankhoz</strong>, a Marína házhoz. Ez egy különleges, modern múzeum, amely Andrej Sládkovič <em>„Marína”</em> című versére épül, amelyet a világ leghosszabb szerelmes versének tartanak.</p>
 
@@ -169,11 +243,30 @@ p {
 
 <a href="https://maps.app.goo.gl/Bme5Li1qL3eZKQkN9" target="_blank" class="navbtn">📍 Navigáció a Szentháromság térre</a>
 
+<div class="distance-box">
+    <button id="terBtn">Távolság mérése (GPS)</button>
+    <span id="terText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
+
 <p>Végül megérkeztek Selmecbánya szívébe, a <strong>Szentháromság térre</strong>. A 16. század óta ez a város fő tere, ahol a leggazdagabb bányavállalkozó családok palotái sorakoznak egymás mellett. A reneszánsz és barokk homlokzatok mögött egykori jogi viták, bányatársasági szerződések és persze kisebb-nagyobb családi történetek lapulnak.</p>
 
 <p>A tér közepén áll a barokk <strong>Szentháromság-szobor</strong>, pestisoszlopként emelt fogadalmi emlék. Az 1710 körüli járvány után fogadták meg a város lakói, hogy ha túlélik a pusztítást, hálájuk jeléül monumentális emléket állítanak. A gazdagon faragott oszlop szentjei, angyalai és felhői úgy törnek az ég felé, mintha maga a város imádsága merevedett volna kővé.</p>
 
 <img src="Rubigall.jpg" alt="Rubigall-ház Selmecbányán" class="section-image">
+
+<a href="https://www.google.com/maps?q=48.45945599002962,18.892410972067733"
+   target="_blank" class="navbtn">
+   📍 Navigáció a Rubigall-házhoz
+</a>
+
+<div class="distance-box">
+    <button id="rubigallBtn">Távolság mérése (GPS)</button>
+    <span id="rubigallText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben.
+    </span>
+</div>
 
 <p>A téren álló paloták között találjuk a gazdag bányászcsaládok egykori házait is. Az egyik ilyen ház – a hagyomány szerint – a <strong>Rubigall családhoz</strong> köthető, akikről egy 16. századi történet beszél. Eszerint <strong>Balassi Bálint</strong>, a magyar reneszánsz költő egy közeli fürdőben csúnyán összeszólalkozott egy fiatal bányavállalkozó fiával. A vita annyira elfajult, hogy Balassi kézzel intézte el az ügyet, majd levelet írt az országgyűlésnek, hogy megvédje becsületét és elmagyarázza, mi vezetett a botrányhoz.</p>
 
@@ -200,6 +293,86 @@ a 7. „Ahol papi nem tanított” ponthoz.
 </div>
 
 </div>
+
+<script>
+// Haversine távolság méterben
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+function formatDistance(m) {
+    if (m < 5) return "Nagyjából a helyszínen vagytok.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m / 1000).toFixed(2) + " km";
+}
+
+function setupDistance(buttonId, textId, targetLat, targetLon, label) {
+    const btn = document.getElementById(buttonId);
+    const text = document.getElementById(textId);
+
+    btn.addEventListener("click", function () {
+        if (!("geolocation" in navigator)) {
+            text.textContent = "A böngésző nem támogatja a helymeghatározást.";
+            return;
+        }
+
+        text.textContent = "Helyzet lekérése...";
+
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            const dist = distanceMeters(lat, lon, targetLat, targetLon);
+            text.textContent =
+                "Jelenlegi távolság " + label + ": " + formatDistance(dist);
+        }, function (err) {
+            text.textContent =
+                "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS és a jogosultság beállításait.";
+        }, {
+            enableHighAccuracy: true,
+            maximumAge: 5000,
+            timeout: 10000
+        });
+    });
+}
+
+// Koordináták
+// városkapu
+setupDistance("gateBtn", "gateText",
+    48.45549688232658, 18.893265659934563, "a városkaputól");
+
+// Kopogtató ház
+setupDistance("klopBtn", "klopText",
+    48.457847427648865, 18.892376042636386, "a Kopogtató háztól");
+
+// Városháza
+setupDistance("varoshazaBtn", "varoshazaText",
+    48.45873011462128, 18.892658925899386, "a Városházától");
+
+// Szent Katalin templom
+setupDistance("katalinBtn", "katalinText",
+    48.458785335534856, 18.893082302353815, "a Szent Katalin templomtól");
+
+// Love Bank
+setupDistance("loveBtn", "loveText",
+    48.45894872807427, 18.8930927183641, "a Love Banktól");
+
+// Szentháromság tér
+setupDistance("terBtn", "terText",
+    48.459546424238596, 18.89254506246573, "a Szentháromság tértől");
+
+// Rubigall-ház
+setupDistance("rubigallBtn", "rubigallText",
+    48.45945599002962, 18.892410972067733, "a Rubigall-háztól");
+</script>
 
 </body>
 </html>
