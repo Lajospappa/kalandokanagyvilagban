@@ -63,15 +63,33 @@ p {
     font-size: 15px;
 }
 
-/* Navigáció + főoldal gombok */
+/* gombsorok */
 .btn-row {
     text-align: center;
     margin-top: 18px;
 }
-.nav-btn,
-.home-btn {
+
+/* Navigációs gomb – égkék */
+.nav-btn {
     display: inline-block;
     margin: 6px 4px;
+    padding: 9px 18px;
+    background: #68c7ff; /* égkék */
+    color: #033048;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 15px;
+}
+.nav-btn:hover {
+    filter: brightness(1.05);
+}
+
+/* Főoldal gomb */
+.home-btn {
+    display: inline-block;
+    margin: 6px 4px 0 4px;
     padding: 9px 18px;
     background: #ffe7a3;
     color: #333;
@@ -81,7 +99,6 @@ p {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     font-size: 15px;
 }
-.nav-btn:hover,
 .home-btn:hover {
     filter: brightness(1.05);
 }
@@ -98,12 +115,6 @@ p {
     <span id="distanceText" class="distance-status">
         Engedélyezd a helymeghatározást a böngészőben.
     </span>
-</div>
-
-<div class="btn-row">
-    <a href="https://maps.app.goo.gl/v3MMfonkRRDs3Hmv5" target="_blank" class="nav-btn">
-        📍 Navigáció a Moja Marína kávézóhoz
-    </a>
 </div>
 
 <p>Ez Selmecbánya egyik legjobb kávézója: igyatok egy finom kávét vagy teát,  
@@ -132,6 +143,13 @@ amelyről olyan jó review-t írtam.</p>
 <p class="highlight" style="font-size:20px; text-align:center; margin-top:25px;">
 Ez a gyümölcs nyitja meg előttetek az „Aranyrög” kaland kapuját.
 </p>
+
+<!-- Navigációs gomb – FŐOLDAL fölött -->
+<div class="btn-row">
+    <a href="https://maps.app.goo.gl/v3MMfonkRRDs3Hmv5" target="_blank" class="nav-btn">
+        📍 Navigáció a Moja Marína kávézóhoz
+    </a>
+</div>
 
 <div class="btn-row">
     <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
