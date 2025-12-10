@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Dolná Ružová – Luther rózsája</title>
+<title>9. PONT – Dolná Ružová utcácska</title>
 
 <!-- Mobil optimalizálás -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,58 +127,54 @@ h2 {
 <body>
 <div class="container">
 
-<h1>Dolná Ružová – Luther rózsája</h1>
+<h1>9. PONT – Dolná Ružová utcácska</h1>
 
 <div class="distance-box">
     <button id="distBtn">Távolság mérése (GPS)</button>
     <span id="distText" class="distance-status">
-        Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok a Luther-rózsától.
+        Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok a következő ponthoz.
     </span>
 </div>
 
 <p>A <span class="highlight">Dolná ružová ulička</span> Selmecbánya egyik legszebb,  
 legfinomabban díszített kis utcája. Nyáron a házfalakon színes rózsák futnak fel,  
-az ablakokból virágok lógnak, és a szűk utca szinte egy festménynek tűnik,  
-ami a völgyre és a városra nyíló panorámával egészül ki.</p>
+az ablakokból virágok lógnak, és a szűk utca úgy kanyarog lefelé,  
+mintha egy régi festménybe léptetek volna bele.  
+A lépcsők, a kovácsoltvas korlátok, a színes homlokzatok  
+és a völgyre nyíló panoráma együtt adják meg azt a hangulatot,  
+ami miatt az embernek kedve lenne itt leülni egy padra,  
+és csak nézni a várost.</p>
 
-<p>Ha lassan végigsétáltok az utca elején, és néha hátranéztek a kilátás felé,  
-észreveszitek, hogy itt már nem csak kő és vakolat vesz körül benneteket,  
-hanem egy egész régi bányaváros hangulata: az apró erkélyek,  
-a színes homlokzatok és a csendesen kanyargó utca mind mesélnek valamit  
-a hajdani selmeci mindennapokról.</p>
+<p>Ahogy lassan sétáltok az utca elején,  
+néha érdemes megállni, hátranézni,  
+és észrevenni az apró részleteket:  
+a régi kapuk feletti díszeket, a kis erkélyeket,  
+a falakba rejtett évszámokat.  
+Itt már nem csak házak között mentek át,  
+hanem egy régi bányaváros emlékei között:  
+minden repedés, minden ablakkeret úgy néz ki,  
+mintha történetet őrizne.</p>
 
-<h2>A Luther-rózsa keresése</h2>
+<p>Most egy olyan házat kell megtalálnotok ezen az utcán,  
+amelynek a homlokzata <span class="highlight">nem csak szép, hanem jelent is valamit</span>.  
+Az előző feladatban már kaptatok egy kulcsot, ami segít:  
+nem itt, a szövegben fogjátok megkapni a választ,  
+hanem nektek kell rájönnötök,  
+<span class="highlight">milyen jelképet kell keresni</span>,  
+és melyik házhoz tartozik.</p>
 
-<p>Ebben az utcában működik az <span class="highlight">evangélikus közösség</span> egyik irodája is.  
-A ház homlokzatán egy különleges jelképet találtok:  
-egy kerek, virágszerű motívumot, közepén kereszttel –  
-ez a <span class="highlight">Luther-rózsa</span>.</p>
-
-<p>A Luther-rózsa <span class="highlight">a reformáció egyik legismertebb szimbóluma</span>.  
-Közepén a fekete kereszt a hit küzdelmét jelképezi,  
-fehér szívben áll, amely a békességet és a megigazulást idézi,  
-körülötte kék háttér, mint az égi reménység,  
-az egészet pedig aranygyűrű fogja körbe,  
-ami arra utal, hogy mindez többet ér bármilyen földi kincsnél.</p>
-
-<p>A ti feladatotok egyszerűnek tűnik – de csak akkor,  
-ha figyelmesen néztek körül:  
-keressétek meg azt a házat ebben az utcában,  
-amelynek homlokzatán a Luther-rózsa látható.</p>
-
-<p class="highlight" style="font-size:19px; text-align:center; margin-top:20px;">
-Ha megtaláltátok a megfelelő házat,<br>
-jegyezzétek fel <strong>a házszámot</strong>!
-</p>
-
-<p style="text-align:center; margin-top:8px;">
-Erre az egyetlen számra lesz szükségetek,<br>
-hogy kinyissátok az utolsó, igazi kincs állomását.
-</p>
+<p>Használjátok bátran mindazt, amit már tudtok,  
+kérdezzetek utána, nézzetek utána –  
+a lényeg, hogy <span class="highlight">ti magatok fedezzétek fel</span>,  
+melyik homlokzaton rejtőzik az a jelkép,  
+amelyhez a következő állomás kódja kapcsolódik.  
+Amikor rátaláltok, ne csak a díszt jegyezzétek meg,  
+hanem <span class="highlight">a házszámot is</span> –  
+még szükségetek lesz rá az igazi kincs kinyitásához.</p>
 
 <div class="nav-wrapper">
     <a href="https://maps.app.goo.gl/wMxBc6gUwCG2kMke6" target="_blank" class="navbtn">
-        📍 Navigáció a Luther-rózsához
+        📍 Navigáció a Dolná Ružová utcácskához
     </a>
     <br>
     <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
@@ -187,7 +183,7 @@ hogy kinyissátok az utolsó, igazi kincs állomását.
 </div>
 
 <script>
-// Luther-rózsa közelében lévő pont
+// Célpont: Luther-rózsa utcabeli pontja
 const targetLat = 48.45900383324572;
 const targetLon = 18.895239733318583;
 
@@ -199,7 +195,7 @@ function distanceMeters(lat1, lon1, lat2, lon2) {
     const R = 6371000;
     const toRad = x => x * Math.PI / 180;
     const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lat2 - lon1);
+    const dLon = toRad(lon2 - lon1);
     const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
@@ -209,7 +205,7 @@ function distanceMeters(lat1, lon1, lat2, lon2) {
 }
 
 function formatDistance(m) {
-    if (m < 5)  return "Nagyjából a Luther-rózsa házánál vagytok.";
+    if (m < 5)  return "Nagyjából a keresett ház közelében vagytok.";
     if (m < 1000) return m.toFixed(0) + " méter";
     return (m / 1000).toFixed(2) + " km";
 }
@@ -227,7 +223,7 @@ distBtn.addEventListener("click", function () {
         const lon = pos.coords.longitude;
         const dist = distanceMeters(lat, lon, targetLat, targetLon);
         distText.textContent =
-            "Jelenlegi távolság a Luther-rózsától: " + formatDistance(dist);
+            "Jelenlegi távolság a keresett háztól: " + formatDistance(dist);
     }, function (err) {
         distText.textContent =
             "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS és a jogosultság beállításait.";
