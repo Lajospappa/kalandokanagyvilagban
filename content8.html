@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <title>8. PONT – Vár ahonnan minden torony látszik</title>
 
+<!-- Mobil optimalizálás -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
     font-family: 'Georgia', serif;
@@ -14,17 +17,17 @@ body {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 720px;
     margin: auto;
-    background: rgba(0,0,0,0.68);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.60);
+    padding: 32px 26px;
+    border-radius: 14px;
+    box-shadow: 0 0 24px rgba(0,0,0,0.7);
 }
 
 h1 {
     font-size: 32px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-align: center;
     color: #ffe7a3;
 }
@@ -32,7 +35,7 @@ h1 {
 p {
     line-height: 1.6;
     font-size: 18px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 }
 
 .highlight {
@@ -41,39 +44,18 @@ p {
 }
 
 h2 {
-    color: #ffe7a3;
     text-align: center;
+    color: #ffe7a3;
     margin-top: 28px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-.photo {
-    display: block;
-    max-width: 100%;
-    border-radius: 10px;
-    margin: 18px auto;
-    box-shadow: 0 0 18px rgba(0,0,0,0.7);
-}
-
-.navbtn {
-    display:inline-block;
-    margin: 8px 0 10px 0;
-    padding: 8px 14px;
-    background:#68c7ff;
-    color:#033048;
-    font-weight:bold;
-    font-size:14px;
-    border-radius:7px;
-    text-decoration:none;
-    box-shadow:0 0 8px rgba(0,0,0,0.4);
-}
-
+/* Távolságmérő */
 .distance-box {
-    margin: 8px 0 22px 0;
-    padding: 10px 14px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.08);
-    font-size: 16px;
+    margin: 0 0 26px 0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.10);
     text-align: center;
 }
 
@@ -81,7 +63,7 @@ h2 {
     font-family: inherit;
     font-size: 16px;
     padding: 8px 14px;
-    border-radius: 6px;
+    border-radius: 7px;
     border: none;
     cursor: pointer;
     background: #ffe7a3;
@@ -92,283 +74,68 @@ h2 {
 
 .distance-status {
     display: block;
-    margin-top: 4px;
+    margin-top: 6px;
     font-size: 15px;
 }
 
-.read-btn {
-    display: inline-block;
-    margin: 10px 0 18px 0;
-    padding: 10px 18px;
-    background: #ffe7a3;
-    color: #2b1b0c;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    font-size: 16px;
-}
-
-.read-btn:active { transform: scale(0.97); }
-
-.tts-controls {
-    margin-top: 40px;
+/* Navigáció – kék */
+.nav-wrapper {
     text-align: center;
+    margin-top: 24px;
 }
 
-.tts-controls button {
-    margin: 6px;
-    padding: 10px 18px;
-    background: #ffe7a3;
-    color: #2b1b0c;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    cursor: pointer;
+.navbtn {
+    display:inline-block;
+    padding:10px 16px;
+    background:#68c7ff;
+    color:#033048;
+    font-weight:bold;
+    font-size:15px;
+    border-radius:7px;
+    text-decoration:none;
+    box-shadow:0 0 8px rgba(0,0,0,0.4);
 }
 
-.tts-controls button:active {
-    transform: scale(0.96);
-}
-
+/* Vissza gomb */
 .home-btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 10px 20px;
-    background: #ffe7a3;
-    color: #333;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    font-size: 16px;
+    display:inline-block;
+    margin-top: 16px;
+    padding:10px 18px;
+    background:#ffe7a3;
+    color:#333;
+    font-weight:bold;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:16px;
+    box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 
-.home-wrapper {
-    text-align: center;
-}
-
+/* Mobil */
 @media (max-width: 480px) {
-    body { padding: 20px 10px; }
-    .container { padding: 22px 16px; }
+    body { padding: 20px 12px; }
+    .container { padding: 26px 18px; }
     h1 { font-size: 26px; }
     p { font-size: 17px; }
+}
+
+img.full {
+    width: 100%;
+    border-radius: 10px;
+    margin: 16px 0;
+    box-shadow: 0 0 14px rgba(0,0,0,0.6);
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
 <h1>8. PONT – Vár ahonnan minden torony látszik</h1>
 
-<button class="read-btn" onclick="felolvas()">🔊 Felolvasás</button>
-
-<a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" target="_blank" class="navbtn">
-📍 Navigáció az Óvár kapujához
-</a>
-
 <div class="distance-box">
-<button id="distBtn">Távolság mérése (GPS)</button>
-<span id="distText" class="distance-status">
-Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok az Óvártól.
-</span>
+    <button id="distBtn">Távolság mérése (GPS)</button>
+    <span id="distText" class="distance-status">
+        Engedélyezd a helymeghatározást, hogy megtudd milyen messze vagytok a vár kapujától.
+    </span>
 </div>
 
-<!-- ====================== -->
-<!--       TELJES SZÖVEG    -->
-<!-- ====================== -->
-
-<p>
-Képzeld el, ahogy a meredek dombon kapaszkodsz felfelé, és hirtelen előtted magasodik a város egyik legősibb őrzője: az Óvár. 
-Nem egyszerű kőfalak ezek – minden köve évszázadok történeteit suttogja.
-Eredetileg román stílusú bazilikaként emelték a templomosok a XIII. században, ám a történelem vihara hamar más szerepet szánt neki.
-A török veszedelem idején a szentélyből várkápolna, az oldalhajókból kaszárnyák, a toronyból őrtorony lett.
-A templom mennyezete eltűnt, helyén udvar nyílt, ahol katonák készültek a védelemre.
-</p>
-
-<p>
-Ahogy belépsz a kapun, mintha egy másik világba lépnél. 
-A Szent Mihály-kápolna csontkamrája baljósan őrzi a múlt árnyait, 
-a zegzugos átjárók pedig titkos ösvényként vezetnek fel a toronyba. 
-Ott, a hatalmas harangok mellett, a város panorámája tárul eléd: a kálvária, a bányászváros háztetői, 
-és a környező hegyek, amelyek évszázadokon át rejtegették az aranyat és ezüstöt.
-</p>
-
-<p>
-De az Óvár nem csupán erőd volt. A falak között titkos pénzverde is működött, ahol a királyi kincstár számára vertek érméket. 
-A legenda szerint a torony mélyén még ma is rejlik egy elfeledett kamra, tele régi szerszámokkal és elásott kincsekkel. 
-A XIX. században pedig igazi multifunkciós épületként szolgált: volt itt levéltár, könyvtár, sőt még a városi rendőrség is helyet kapott.
-</p>
-
-<p>
-És most jön a történet egyik legérdekesebb – és legszórakoztatóbb – része:  
-hiába erősítették meg bástyákkal az Óvárt, **olyan helyre építették**, hogy a fölé magasodó **Paradicsom-hegyről a törökök simán szét tudták ágyúzni**.  
-Ez finoman szólva is stratégiai baklövés volt…  
-Mintha valaki azt mondta volna: „Építsünk várat! Oda, ahol magasabbról simán rálőnek!”  
-A törökök pedig éltek is a lehetőséggel – a Paradicsom-hegyi ágyúállásokból gyakorlatilag felsőpályáról célozhatták a várat.
-</p>
-
-<p>
-Az Óvár így lett egyszerre erős és sebezhető – egy különös ellentmondás, ami ma is érezhető a falak között. 
-Mintha maga az épület is rejtvény lenne: templom, vár, múzeum, titkos pénzverde… mindez egyetlen falak közé zárva.
-</p>
-
-<!-- Ide jönnek az eredeti képek -->
-<img src="ovar 4.jpg" class="photo">
-<img src="ovar 2.jpg" class="photo">
-<img src="ovar.jpg" class="photo">
-<img src="kuvaszok.jpg" class="photo">
-
-<div class="home-wrapper">
-<a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
-</div>
-
-</div>
-
-<!-- ====== FEL OLVASÓ VEZÉRLŐK ====== -->
-<div class="tts-controls">
-<button onclick="elozo()">⏪ -10 mp</button>
-<button onclick="szunetFolytat()">⏸ Szünet / ▶ Folytatás</button>
-<button onclick="leallit()">⛔ Leállítás</button>
-<button onclick="kov()">⏩ +10 mp</button>
-</div>
-
-<!-- ================================ -->
-<!--      SCRIPT — KÖVETKEZŐ ÜZENET  -->
-<!-- ================================ -->
-<!-- ================================= -->
-<!-- 🔊 TELJES, iPHONE-KOMPATIBILIS TTS -->
-<!-- ================================= -->
-<script>
-let utterance = null;
-let paused = false;
-let fullText = "";
-let magyarHang = null;
-
-// 🔥 Magyar hang betöltése (iPhone-nál kötelező)
-function hangBetoltes() {
-    const voices = speechSynthesis.getVoices();
-    magyarHang = voices.find(v =>
-        v.lang.toLowerCase() === "hu-hu" ||
-        v.lang.toLowerCase().startsWith("hu")
-    );
-}
-
-speechSynthesis.onvoiceschanged = hangBetoltes;
-hangBetoltes();
-
-// 🔎 teljes szöveg kigyűjtése
-function getText() {
-    const container = document.querySelector(".container");
-    let text = "";
-    container.querySelectorAll("p, h1, h2, li").forEach(el => {
-        text += el.innerText + " ";
-    });
-    return text;
-}
-
-// 🔊 Felolvasás indítása
-function felolvas() {
-    speechSynthesis.cancel();
-    paused = false;
-
-    fullText = getText();
-    utterance = new SpeechSynthesisUtterance(fullText);
-
-    // magyar hang beállítása
-    utterance.lang = "hu-HU";
-    if (magyarHang) utterance.voice = magyarHang;
-
-    speechSynthesis.speak(utterance);
-}
-
-// ⏸ Szünet / ▶ Folytatás
-function szunetFolytat() {
-    if (!utterance) return;
-
-    if (!paused) {
-        speechSynthesis.pause();
-        paused = true;
-    } else {
-        speechSynthesis.resume();
-        paused = false;
-    }
-}
-
-// ⛔ Leállítás
-function leallit() {
-    speechSynthesis.cancel();
-    paused = false;
-}
-
-// ⏪ vissza (10% ugrás)
-function elozo() {
-    if (!fullText) return;
-    speechSynthesis.cancel();
-
-    let pos = Math.floor(fullText.length * 0.1);
-    let newText = fullText.substring(Math.max(0, fullText.length - pos));
-
-    utterance = new SpeechSynthesisUtterance(newText);
-    utterance.lang = "hu-HU";
-    if (magyarHang) utterance.voice = magyarHang;
-
-    speechSynthesis.speak(utterance);
-}
-
-// ⏩ előre (10% ugrás)
-function kov() {
-    if (!fullText) return;
-    speechSynthesis.cancel();
-
-    let pos = Math.floor(fullText.length * 0.1);
-    let newText = fullText.substring(pos);
-
-    utterance = new SpeechSynthesisUtterance(newText);
-    utterance.lang = "hu-HU";
-    if (magyarHang) utterance.voice = magyarHang;
-
-    speechSynthesis.speak(utterance);
-}
-
-/* ===== GPS ===== */
-const targetLat = 48.459336407159405;
-const targetLon = 18.891808326726757;
-
-const distBtn  = document.getElementById("distBtn");
-const distText = document.getElementById("distText");
-
-function distanceMeters(lat1, lon1, lat2, lon2) {
-    const R = 6371000, toRad = x => x * Math.PI / 180;
-    const dLat = toRad(lat2 - lat1), dLon = toRad(lon2 - lon1);
-    const a = Math.sin(dLat/2)**2 +
-              Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*
-              Math.sin(dLon/2)**2;
-    return 2*R*Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) * R;
-}
-
-function formatDistance(m) {
-    if (m < 5)  return "Nagyjából az Óvár kapujánál vagytok.";
-    if (m < 1000) return m.toFixed(0) + " méter";
-    return (m/1000).toFixed(2) + " km";
-}
-
-distBtn.addEventListener("click", () => {
-    distText.textContent = "Helyzet lekérése...";
-    navigator.geolocation.getCurrentPosition(pos => {
-        const lat = pos.coords.latitude, lon = pos.coords.longitude;
-        const dist = distanceMeters(lat, lon, targetLat, targetLon);
-        distText.textContent = "Jelenlegi távolság az Óvártól: " + formatDistance(dist);
-    }, () => {
-        distText.textContent = "Nem sikerült lekérni a GPS-adatot.";
-    }, { enableHighAccuracy: true });
-});
-</script>
-
-</body>
-</html>
