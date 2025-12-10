@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>8. PONT – Vár ahonnan minden torony látszik</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
@@ -12,209 +13,222 @@ body {
     padding: 40px;
     margin: 0;
 }
-
 .container {
-    max-width: 700px;
+    max-width: 750px;
     margin: auto;
-    background: rgba(0,0,0,0.68);
+    background: rgba(0,0,0,0.60);
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    border-radius: 14px;
+    box-shadow: 0 0 22px rgba(0,0,0,0.7);
 }
-
 h1 {
     font-size: 32px;
-    margin-bottom: 10px;
     text-align: center;
+    margin-bottom: 15px;
     color: #ffe7a3;
 }
-
+h2 {
+    font-size: 25px;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    color: #ffe7a3;
+}
 p {
     line-height: 1.6;
     font-size: 18px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 }
-
 .highlight {
     color: #ffe7a3;
     font-weight: bold;
 }
-
-h2 {
-    color: #ffe7a3;
-    text-align: center;
-    margin-top: 28px;
-    margin-bottom: 10px;
-}
-
 .photo {
-    display: block;
-    max-width: 100%;
+    width: 100%;
     border-radius: 10px;
-    margin: 18px auto;
-    box-shadow: 0 0 18px rgba(0,0,0,0.7);
+    margin: 18px 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
+/* NAVIGÁCIÓS GOMB */
 .navbtn {
     display:inline-block;
-    margin: 8px 0 10px 0;
-    padding: 8px 14px;
+    padding:10px 16px;
     background:#68c7ff;
     color:#033048;
     font-weight:bold;
-    font-size:14px;
+    font-size:16px;
     border-radius:7px;
     text-decoration:none;
-    box-shadow:0 0 8px rgba(0,0,0,0.4);
+    box-shadow:0 0 10px rgba(0,0,0,0.45);
 }
 
+/* GPS BOX */
 .distance-box {
-    margin: 8px 0 22px 0;
-    padding: 10px 14px;
+    margin: 20px 0 25px 0;
+    padding: 12px 16px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.08);
-    font-size: 16px;
-    text-align: center;
+    background: rgba(255,255,255,0.08);
+    text-align:center;
 }
-
 .distance-box button {
     font-family: inherit;
     font-size: 16px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    background: #ffe7a3;
-    color: #2b1b0c;
-    margin-bottom: 6px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    padding: 9px 14px;
+    background:#ffe7a3;
+    border:none;
+    border-radius:7px;
+    cursor:pointer;
+}
+.distance-status {
+    display:block;
+    margin-top:6px;
+    font-size:15px;
 }
 
-.read-btn, .stop-btn {
-    display: inline-block;
-    margin: 10px 8px 18px 8px;
-    padding: 10px 18px;
-    background: #ffe7a3;
-    color: #2b1b0c;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    font-size: 16px;
-}
-
+/* VISSZA */
+.home-wrapper { text-align:center; margin-top:28px; }
 .home-btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 10px 20px;
-    background: #ffe7a3;
-    color: #333;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    font-size: 16px;
+    display:inline-block;
+    padding:10px 18px;
+    background:#ffe7a3;
+    color:#333;
+    font-weight:bold;
+    border-radius:8px;
+    text-decoration:none;
+    box-shadow:0 0 10px rgba(0,0,0,0.5);
+    font-size:16px;
 }
 
-.home-wrapper { text-align: center; }
-
-@media (max-width: 480px) {
-    body { padding: 20px 10px; }
-    .container { padding: 22px 16px; }
-    h1 { font-size: 26px; }
-    p { font-size: 17px; }
+/* Felolvasás */
+.speak-btn {
+    margin-top:25px;
+    background:#ffd27f;
+    color:#3b2600;
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 0 10px rgba(0,0,0,0.4);
 }
+.speak-btn:active { transform:scale(0.97); }
+
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
 <h1>8. PONT – Vár ahonnan minden torony látszik</h1>
-
-<button class="read-btn" onclick="felolvas()">🔊 Felolvasás</button>
-<button class="stop-btn" onclick="stopRead()">⛔ Leállítás</button>
 
 <a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" target="_blank" class="navbtn">
 📍 Navigáció az Óvár kapujához
 </a>
 
 <div class="distance-box">
-<button id="distBtn">Távolság mérése (GPS)</button>
-<span id="distText" class="distance-status">
-Engedélyezd a helymeghatározást a böngészőben.
-</span>
+    <button id="distBtn">Távolság mérése (GPS)</button>
+    <span id="distText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok az Óvártól.
+    </span>
 </div>
 
-<!-- ====================== -->
-<!--   TELJES BŐVÍTETT SZÖVEG -->
-<!-- ====================== -->
+<p>Az <span class="highlight">Óvár</span> Selmecbánya egyik legősibb őrhelye. Bár első ránézésre templomnak tűnik, a 13. században valóban plébániatemplomként épült. Csak később, a török fenyegetés idején erősítették meg falakkal, bástyákkal és kaputoronnyal. A templom így lassan várrá alakult – egyszerre lett <span class="highlight">a hit helye és a város védelmezője</span>.</p>
 
-<p>Képzeld el, ahogy a meredek dombon kapaszkodsz felfelé, és egyszer csak előtted tornyosul Selmecbánya egyik legősibb őrzője: az Óvár. Nem egyszerű kőfal ez: minden egyes köve régi idők emlékét őrzi. A XIII. században még román stílusú templomként állt, a templomosok keze munkája nyomán. A történelem azonban nem hagyta érintetlenül: a török fenyegetés idején a szentélyből várkápolna, az oldalhajókból pedig kaszárnyák lettek.</p>
+<img src="ovar 4.jpg" class="photo">
 
-<p>Ahogy belépsz a kapun – mintha átlépnél egy határvonalat. A Szent Mihály-kápolna csontkamrája suttogó csönddel fogad. A szűk átjárókon át feljutsz a toronyba, ahol a harangok között ott zúg a város ezeréves lehelete. Innen látszik a kálvária, a bányászfalvak és a környező hegyek, amelyek hosszú évszázadokon át ezüstöt és aranyat rejtettek.</p>
+<p>A környező bányavidék miatt az Óvár fontos megfigyelőpont volt: innen látták a völgyben futó aknák szellőzőit. Ha valamelyikből túl sok por vagy gőz tört fel, tudták, hogy baj közeleg. A vár udvara ma is őrzi ezt a különös, feszültséggel teli csendet.</p>
 
-<p>A vár falai között egykor titkos pénzverde működött: éjszakánként csengő fémhang kísérte a királyi érmék születését. A legenda szerint a torony alatt ma is létezik egy lezárt kamra elásott kincsekkel.</p>
+<img src="ovar 2.jpg" class="photo">
 
-<p>Ám az Óvár történetének legérdekesebb – és legkomikusabb – epizódja az építők baklövése. Nem vették észre, hogy a közeli Paradicsom-hegy magasabbról néz le rá. A törökök pedig gyorsan felfedezték a hibát: egyszerűen felvitték az ágyúikat a hegy tetejére, és FENTRŐL kezdték el ágyúzni az Óvárat. A vár védhetetlenné vált – hiába volt erős, rossz helyre épült. A helyiek később úgy mondták: „A vár kemény volt, csak a hegy volt keményebb nála.”</p>
+<p>A belső terekben ma kiállítások találhatók: régi óraszerkezet, fegyverek, börtöncellák, kínzókamra és a bányaváros történetét bemutató tárlatok. A falak között járva úgy érzi az ember, mintha egy kőbe faragott időkapszulában sétálna.</p>
 
-<p>Az Óvár mégis áll. Templom, erőd, kaszárnya, levéltár, múzeum – és most újra játék. A falai között most a ti feladatotok következő kulcsa rejtőzik.</p>
+<img src="ovar.jpg" class="photo">
 
-<h2>A feladat</h2>
+<h2>Hol álljatok meg?</h2>
 
-<p>Forduljatok háttal a kapunak, sétáljatok a <span class="highlight">kandelláberig</span>, és nézzetek le a városra. A látványban öt jellegzetes torony bukkan fel. Vegyétek sorra őket balról jobbra, és írjátok fel a nevük első betűjét.</p>
+<p>Ha felértek az Óvárhoz, menjetek a <span class="highlight">kapuig</span>, majd  
+<span class="highlight">fordítsatok hátat</span> neki. A város felé nézve sétáljatok előre az  
+<span class="highlight">első kandelláberig</span>, vagyis az első lámpaoszlopig. Innen kell figyelni a város tornyait.</p>
 
-<p>Ha helyes a sorrend, a betűk ezt adják ki: egy ősi magyar pásztorkutya nevét. Ez a kulcs a 9. ponthoz vezető kapuhoz.</p>
+<h2>A rejtett feladvány</h2>
+
+<p>Erről a pontról több jellegzetes, tornyos épület látható. Mindegyik fontos szerepet játszik a város történetében – de most nem a történetükre lesz szükség, hanem valami egészen másra.</p>
+
+<p>
+1. Nézzétek végig a látványban kiemelkedő tornyokat.<br>
+2. Minden egyes toronyról döntsétek el, melyik épülethez tartozik.<br>
+3. A nevek kezdőbetűit írjátok le magatoknak – <span class="highlight">ez a ti titkos kódsorotok</span>.
+</p>
+
+<p>Ez az öt betű később egy pásztorkutya nevévé áll majd össze – egy olyané, akiről azt mesélik, hogy a felvidéki hegyek juhnyáját is éberen vigyázta.</p>
 
 <img src="kuvaszok.jpg" class="photo">
 
-<p class="highlight" style="text-align:center; font-size:20px;">
-A megfejtés egy magyar pásztorkutya neve.<br>
-Ez nyitja a 9. pontot.
+<p>Ha a megfelelő sorrendben illesztitek be a betűket, összeáll egy ősi <span class="highlight">magyar fehér pásztorkutya</span> neve.  
+Ez a név lesz a kulcs a következő állomáshoz.</p>
+
+<p class="highlight" style="font-size:20px; text-align:center;">
+A 9. pont, a „Luther rózsája” kapuját<br>  
+ennek a pásztorkutyának a neve nyitja.
 </p>
 
 <div class="home-wrapper">
-<a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
 </div>
 
-</div>
+<button class="speak-btn" onclick="speakText()">🔊 Felolvasás</button>
 
-<!-- SCRIPT A KÖVETKEZŐ ÜZENETBEN -->
-<!-- Ultra-egyszerű szövegfelolvasó -->
-<div style="text-align:center; margin-top:25px;">
-    <button onclick="speakText()" 
-            style="padding:10px 18px; font-size:16px; border-radius:8px; border:none; background:#ffe7a3; cursor:pointer;">
-        🔊 Felolvasás
-    </button>
-
-    <button onclick="stopSpeaking()" 
-            style="padding:10px 18px; font-size:16px; border-radius:8px; border:none; background:#ffb4b4; cursor:pointer; margin-left:10px;">
-        ⛔ Leállítás
-    </button>
 </div>
 
 <script>
-let utterance;
+// GPS
+const targetLat = 48.459336407159405;
+const targetLon = 18.891808326726757;
+
+const distBtn  = document.getElementById("distBtn");
+const distText = document.getElementById("distText");
+
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat/2)**2 +
+        Math.cos(toRad(lat1))*Math.cos(toRad(lat2)) *
+        Math.sin(dLon/2)**2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R*c;
+}
+
+function formatDistance(m) {
+    if (m < 5) return "Nagyjából az Óvárnál vagytok.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m/1000).toFixed(2) + " km";
+}
+
+distBtn.addEventListener("click", () => {
+    distText.textContent = "Helyzet lekérése...";
+    navigator.geolocation.getCurrentPosition(pos => {
+        const d = distanceMeters(
+            pos.coords.latitude,
+            pos.coords.longitude,
+            targetLat, targetLon
+        );
+        distText.textContent = "Távolság: " + formatDistance(d);
+    }, () => {
+        distText.textContent = "Nem sikerült lekérni a helyzetet.";
+    }, { enableHighAccuracy:true });
+});
 
 // Felolvasás
 function speakText() {
-    const element = document.querySelector('.container'); 
-    const text = element.innerText || element.textContent;
-
-    if (utterance) window.speechSynthesis.cancel();
-
-    utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "hu-HU";
-    utterance.rate = 1;        // tempó
-    utterance.pitch = 1;       // hangmagasság
-
-    window.speechSynthesis.speak(utterance);
-}
-
-// Stop
-function stopSpeaking() {
-    window.speechSynthesis.cancel();
+    const text = document.body.innerText;
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "hu-HU";
+    speechSynthesis.speak(utter);
 }
 </script>
+
+</body>
+</html>
