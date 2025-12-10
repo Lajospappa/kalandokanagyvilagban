@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>8. PONT – Vár ahonnan minden torony látszik</title>
+
 <style>
 body {
     font-family: 'Georgia', serif;
@@ -168,19 +169,19 @@ h2 {
 <button class="read-btn" onclick="felolvas()">🔊 Felolvasás</button>
 
 <a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" target="_blank" class="navbtn">
-    📍 Navigáció az Óvár kapujához
+📍 Navigáció az Óvár kapujához
 </a>
 
 <div class="distance-box">
-    <button id="distBtn">Távolság mérése (GPS)</button>
-    <span id="distText" class="distance-status">
-        Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok az Óvártól.
-    </span>
+<button id="distBtn">Távolság mérése (GPS)</button>
+<span id="distText" class="distance-status">
+Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok az Óvártól.
+</span>
 </div>
 
-<!-- 🔽 IDE JÖN A TELJES SAJÁT TARTALMAD (változatlanul) -->
-<p>Az <span class="highlight">Óvár</span>, vagyis a régi vár Selmecbánya egyik legősibb őrhelye...  
-(itt marad a teljes szöveged, én most nem rövidítem tovább)
+<!-- 🔽 A TE TELJES SZÖVEGED MARAD VÁLTOZATLANUL -->
+<p>Az <span class="highlight">Óvár</span>, vagyis a régi vár Selmecbánya egyik legősibb őrhelye...
+(ide kerül az összes eredeti bekezdésed, ahogy neked volt)
 </p>
 
 <img src="ovar 4.jpg" class="photo">
@@ -189,15 +190,137 @@ h2 {
 <img src="kuvaszok.jpg" class="photo">
 
 <div class="home-wrapper">
-    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+<a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
 </div>
 
 </div>
 
 <!-- ====== FEL OLVASÓ VEZÉRLŐK ====== -->
 <div class="tts-controls">
-    <button onclick="elozo()">⏪ -10 mp</button>
-    <button onclick="szunetFolytat()">⏸ Szünet / ▶ Folytatás</button>
-    <button onclick="leallit()">⛔ Leállítás</button>
-    <button onclick="kov()">⏩ +10 mp</button>
+<button onclick="elozo()">⏪ -10 mp</button>
+<button onclick="szunetFolytat()">⏸ Szünet / ▶ Folytatás</button>
+<button onclick="leallit()">⛔ Leállítás</button>
+<button onclick="kov()">⏩ +10 mp</button>
 </div>
+
+<!-- ================================= -->
+<!-- 🔊 TELJES, iPHONE-KOMPATIBILIS TTS -->
+<!-- ================================= -->
+<script>
+let utterance = null;
+let paused = false;
+let fullText = "";
+let magyarHang = null;
+
+function hangBetoltes() {
+    const voices = speechSynthesis.getVoices();
+    magyarHang = voices.find(v =>
+        v.lang.toLowerCase() === "hu-hu" ||
+        v.lang.toLowerCase().startsWith("hu")
+    );
+}
+
+speechSynthesis.onvoiceschanged = hangBetoltes;
+hangBetoltes();
+
+function getText() {
+    const container = document.querySelector(".container");
+    let text = "";
+    container.querySelectorAll("p, h1, h2, li").forEach(el => {
+        text += el.innerText + " ";
+    });
+    return text;
+}
+
+function felolvas() {
+    speechSynthesis.cancel();
+    paused = false;
+
+    fullText = getText();
+    utterance = new SpeechSynthesisUtterance(fullText);
+    utterance.lang = "hu-HU";
+    if (magyarHang) utterance.voice = magyarHang;
+
+    speechSynthesis.speak(utterance);
+}
+
+function szunetFolytat() {
+    if (!utterance) return;
+    if (!paused) {
+        speechSynthesis.pause();
+        paused = true;
+    } else {
+        speechSynthesis.resume();
+        paused = false;
+    }
+}
+
+function leallit() {
+    speechSynthesis.cancel();
+    paused = false;
+}
+
+function elozo() {
+    if (!fullText) return;
+    speechSynthesis.cancel();
+
+    let pos = Math.floor(fullText.length * 0.1);
+    let newText = fullText.substring(Math.max(0, fullText.length - pos));
+
+    utterance = new SpeechSynthesisUtterance(newText);
+    utterance.lang = "hu-HU";
+    if (magyarHang) utterance.voice = magyarHang;
+
+    speechSynthesis.speak(utterance);
+}
+
+function kov() {
+    if (!fullText) return;
+    speechSynthesis.cancel();
+
+    let pos = Math.floor(fullText.length * 0.1);
+    let newText = fullText.substring(pos);
+
+    utterance = new SpeechSynthesisUtterance(newText);
+    utterance.lang = "hu-HU";
+    if (magyarHang) utterance.voice = magyarHang;
+
+    speechSynthesis.speak(utterance);
+}
+
+/* ===== GPS ===== */
+const targetLat = 48.459336407159405;
+const targetLon = 18.891808326726757;
+
+const distBtn  = document.getElementById("distBtn");
+const distText = document.getElementById("distText");
+
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000, toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1), dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat/2)**2 +
+              Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*
+              Math.sin(dLon/2)**2;
+    return 2*R*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function formatDistance(m) {
+    if (m < 5)  return "Nagyjából az Óvár kapujánál vagytok.";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m/1000).toFixed(2) + " km";
+}
+
+distBtn.addEventListener("click", () => {
+    distText.textContent = "Helyzet lekérése...";
+    navigator.geolocation.getCurrentPosition(pos => {
+        const lat = pos.coords.latitude, lon = pos.coords.longitude;
+        const dist = distanceMeters(lat, lon, targetLat, targetLon);
+        distText.textContent = "Jelenlegi távolság az Óvártól: " + formatDistance(dist);
+    }, () => {
+        distText.textContent = "Nem sikerült lekérni a GPS-adatot.";
+    }, { enableHighAccuracy: true });
+});
+</script>
+
+</body>
+</html>
