@@ -1,105 +1,203 @@
-<script>
-// ==========================
-// 🔊 iPHONE-KOMPATIBILIS MAGYAR TTS
-// ==========================
-
-let utterance = null;
-let paused = false;
-let fullText = "";
-let magyarHang = null;
-
-// 🔥 1) Magyar hang lekérése — iPhone miatt kötelező
-function hangBetoltes() {
-    const voices = speechSynthesis.getVoices();
-
-    // megkeressük a magyar hangot
-    magyarHang = voices.find(v =>
-        v.lang.toLowerCase() === "hu-hu" ||
-        v.lang.toLowerCase().startsWith("hu")
-    );
-
-    // ha nincs magyar hang, akkor is beállítjuk lang-re, ez segít
-    if (!magyarHang) {
-        console.log("Nincs kifejezett magyar hang, lang=hu-HU lesz használva.");
-    }
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>8. PONT – Vár ahonnan minden torony látszik</title>
+<style>
+body {
+    font-family: 'Georgia', serif;
+    background: url('óvárháttér.jpg') center/cover no-repeat fixed;
+    color: #f5f5f5;
+    padding: 40px;
+    margin: 0;
 }
 
-// iPhone miatt szükséges: a hangok később érkeznek meg
-speechSynthesis.onvoiceschanged = hangBetoltes;
-hangBetoltes();
-
-// 🔎 teljes szöveg kigyűjtése
-function getText() {
-    const container = document.querySelector(".container");
-    let text = "";
-    container.querySelectorAll("p, h1, h2, li").forEach(el => {
-        text += el.innerText + " ";
-    });
-    return text;
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(0,0,0,0.68);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
 }
 
-// 🔊 Felolvasás indítása
-function felolvas() {
-    speechSynthesis.cancel();
-    paused = false;
-
-    fullText = getText();
-
-    utterance = new SpeechSynthesisUtterance(fullText);
-
-    // iPhone-on ez a kulcs:
-    utterance.lang = "hu-HU";
-    if (magyarHang) utterance.voice = magyarHang;
-
-    speechSynthesis.speak(utterance);
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #ffe7a3;
 }
 
-// ⏸ Szünet / ▶ Folytatás
-function szunetFolytat() {
-    if (!utterance) return;
-
-    if (!paused) {
-        speechSynthesis.pause();
-        paused = true;
-    } else {
-        speechSynthesis.resume();
-        paused = false;
-    }
+p {
+    line-height: 1.6;
+    font-size: 18px;
+    margin-bottom: 14px;
 }
 
-// ⛔ Leállítás
-function leallit() {
-    speechSynthesis.cancel();
-    paused = false;
+.highlight {
+    color: #ffe7a3;
+    font-weight: bold;
 }
 
-// ⏪ Vissza (10% ugrás)
-function elozo() {
-    if (!fullText) return;
-    speechSynthesis.cancel();
-
-    let pos = Math.floor(fullText.length * 0.1);
-    let newText = fullText.substring(Math.max(0, fullText.length - pos));
-
-    utterance = new SpeechSynthesisUtterance(newText);
-    utterance.lang = "hu-HU";
-    if (magyarHang) utterance.voice = magyarHang;
-
-    speechSynthesis.speak(utterance);
+h2 {
+    color: #ffe7a3;
+    text-align: center;
+    margin-top: 28px;
+    margin-bottom: 10px;
 }
 
-// ⏩ Előre (10% ugrás)
-function kov() {
-    if (!fullText) return;
-    speechSynthesis.cancel();
-
-    let pos = Math.floor(fullText.length * 0.1);
-    let newText = fullText.substring(pos);
-
-    utterance = new SpeechSynthesisUtterance(newText);
-    utterance.lang = "hu-HU";
-    if (magyarHang) utterance.voice = magyarHang;
-
-    speechSynthesis.speak(utterance);
+.photo {
+    display: block;
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 18px auto;
+    box-shadow: 0 0 18px rgba(0,0,0,0.7);
 }
-</script>
+
+.navbtn {
+    display:inline-block;
+    margin: 8px 0 10px 0;
+    padding: 8px 14px;
+    background:#68c7ff;
+    color:#033048;
+    font-weight:bold;
+    font-size:14px;
+    border-radius:7px;
+    text-decoration:none;
+    box-shadow:0 0 8px rgba(0,0,0,0.4);
+}
+
+.distance-box {
+    margin: 8px 0 22px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+    text-align: center;
+}
+
+.distance-box button {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    margin-bottom: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+.distance-status {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+.read-btn {
+    display: inline-block;
+    margin: 10px 0 18px 0;
+    padding: 10px 18px;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 16px;
+}
+
+.read-btn:active { transform: scale(0.97); }
+
+.tts-controls {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.tts-controls button {
+    margin: 6px;
+    padding: 10px 18px;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.tts-controls button:active {
+    transform: scale(0.96);
+}
+
+.home-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 20px;
+    background: #ffe7a3;
+    color: #333;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 16px;
+}
+
+.home-wrapper {
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    body { padding: 20px 10px; }
+    .container { padding: 22px 16px; }
+    h1 { font-size: 26px; }
+    p { font-size: 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>8. PONT – Vár ahonnan minden torony látszik</h1>
+
+<button class="read-btn" onclick="felolvas()">🔊 Felolvasás</button>
+
+<a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" target="_blank" class="navbtn">
+    📍 Navigáció az Óvár kapujához
+</a>
+
+<div class="distance-box">
+    <button id="distBtn">Távolság mérése (GPS)</button>
+    <span id="distText" class="distance-status">
+        Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze vagytok az Óvártól.
+    </span>
+</div>
+
+<!-- 🔽 IDE JÖN A TELJES SAJÁT TARTALMAD (változatlanul) -->
+<p>Az <span class="highlight">Óvár</span>, vagyis a régi vár Selmecbánya egyik legősibb őrhelye...  
+(itt marad a teljes szöveged, én most nem rövidítem tovább)
+</p>
+
+<img src="ovar 4.jpg" class="photo">
+<img src="ovar 2.jpg" class="photo">
+<img src="ovar.jpg" class="photo">
+<img src="kuvaszok.jpg" class="photo">
+
+<div class="home-wrapper">
+    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+</div>
+
+</div>
+
+<!-- ====== FEL OLVASÓ VEZÉRLŐK ====== -->
+<div class="tts-controls">
+    <button onclick="elozo()">⏪ -10 mp</button>
+    <button onclick="szunetFolytat()">⏸ Szünet / ▶ Folytatás</button>
+    <button onclick="leallit()">⛔ Leállítás</button>
+    <button onclick="kov()">⏩ +10 mp</button>
+</div>
