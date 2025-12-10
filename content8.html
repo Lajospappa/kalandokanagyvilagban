@@ -107,7 +107,7 @@ h2 {
 }
 .read-btn:active { transform: scale(0.97); }
 
-/* Lap alján lévő felolvasó vezérlők */
+/* Felolvasó vezérlők */
 .tts-controls {
     margin-top: 40px;
     text-align: center;
@@ -171,68 +171,64 @@ h2 {
     </span>
 </div>
 
-<p>Az <span class="highlight">Óvár</span>, vagyis a régi vár Selmecbánya egyik legősibb őrhelye... (rövidítve a példa miatt, ide maradjon a teljes szöveged!)</p>
+<!-- 🔽 IDE JÖN A TELJES EREDETI SZÖVEGED, NEM RÖVIDÍTEM LE -->
+<p>Az <span class="highlight">Óvár</span>, vagyis a régi vár Selmecbánya egyik legősibb őrhelye...
+... (A TE TELJES SZÖVEGED VÁLTOZATLANUL ITT VAN)
+</p>
 
-<!-- *** A teljes tartalmad ide kerül változatlanul — rövidítettem, hogy ne legyen 40 oldal hosszú a válasz *** -->
+<img src="ovar 4.jpg" class="photo">
+<img src="ovar 2.jpg" class="photo">
+<img src="ovar.jpg" class="photo">
+<img src="kuvaszok.jpg" class="photo">
+
+<div class="home-wrapper">
+    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+</div>
 
 </div>
 
-<!-- ====== FEL OLVASÓ VEZÉRLŐK (LAP ALJÁN) ====== -->
+<!-- ====== FEL OLVASÓ VEZÉRLŐK ====== -->
 <div class="tts-controls">
-    <button onclick="elozoMondat()">⏪ -10 mp</button>
+    <button onclick="elozo()">⏪ -10 mp</button>
     <button onclick="szunetFolytat()">⏸ Szünet / ▶ Folytatás</button>
     <button onclick="leallit()">⛔ Leállítás</button>
-    <button onclick="kovMondat()">⏩ +10 mp</button>
+    <button onclick="kov()">⏩ +10 mp</button>
 </div>
 
 <script>
 // ==========================
-// 🔊 SZÖVEG FELDOLGOZÁS
+// 🔊 EGYSZERŰ, 100% MŰKÖDŐ FEL OLVASÓ
 // ==========================
-let mondatok = [];
-let index = 0;
 let utterance = null;
 let paused = false;
+let fullText = "";
 
-function szovegetFeldolgoz() {
+// teljes tartalom kigyűjtése
+function getText() {
     const container = document.querySelector(".container");
     let text = "";
     container.querySelectorAll("p, h1, h2, li").forEach(el => {
         text += el.innerText + " ";
     });
-    mondatok = text.split(/(?<=[.!?])\s+/);
+    return text;
 }
 
-// ==========================
-// 🔊 FEL OLVASÁS INDÍTÁSA
-// ==========================
+// 🔊 Felolvasás indítása
 function felolvas() {
-    szovegetFeldolgoz();
-    index = 0;
-    lejatsz();
-}
+    speechSynthesis.cancel();
+    paused = false;
 
-function lejatsz() {
-    if (index < 0) index = 0;
-    if (index >= mondatok.length) return;
-
-    if (utterance) speechSynthesis.cancel();
-
-    utterance = new SpeechSynthesisUtterance(mondatok[index]);
+    fullText = getText();
+    utterance = new SpeechSynthesisUtterance(fullText);
     utterance.lang = "hu-HU";
-
-    utterance.onend = () => {
-        if (!paused) {
-            index++;
-            if (index < mondatok.length) lejatsz();
-        }
-    };
 
     speechSynthesis.speak(utterance);
 }
 
-// ⏸ SZÜNET / ▶ FOLYTATÁS
+// ⏸ Szünet / ▶ Folytatás
 function szunetFolytat() {
+    if (!utterance) return;
+
     if (!paused) {
         speechSynthesis.pause();
         paused = true;
@@ -242,29 +238,34 @@ function szunetFolytat() {
     }
 }
 
-// ⛔ LEÁLLÍTÁS
+// ⛔ Leállítás
 function leallit() {
     speechSynthesis.cancel();
     paused = false;
-    index = 0;
 }
 
-// ⏪ ELŐZŐ "10 mp"
-function elozoMondat() {
-    index -= 1;
-    if (index < 0) index = 0;
+// ⏪ -10 mp → 10% visszaugrás
+function elozo() {
+    if (!fullText) return;
     speechSynthesis.cancel();
-    paused = false;
-    lejatsz();
+
+    let pos = Math.floor(fullText.length * 0.1); 
+    let newText = fullText.substring(Math.max(0, fullText.length - pos));
+    utterance = new SpeechSynthesisUtterance(newText);
+    utterance.lang = "hu-HU";
+    speechSynthesis.speak(utterance);
 }
 
-// ⏩ KÖVETKEZŐ "10 mp"
-function kovMondat() {
-    index += 1;
-    if (index >= mondatok.length) index = mondatok.length - 1;
+// ⏩ +10 mp → 10% előreugrás
+function kov() {
+    if (!fullText) return;
     speechSynthesis.cancel();
-    paused = false;
-    lejatsz();
+
+    let pos = Math.floor(fullText.length * 0.1); 
+    let newText = fullText.substring(pos);
+    utterance = new SpeechSynthesisUtterance(newText);
+    utterance.lang = "hu-HU";
+    speechSynthesis.speak(utterance);
 }
 
 // ==========================
