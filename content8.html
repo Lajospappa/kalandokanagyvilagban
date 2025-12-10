@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>8. PONT – Vár ahonnan minden torony látszik</title>
 
-<!-- Mobil optimalizálás -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -48,6 +47,13 @@ h2 {
     color: #ffe7a3;
     margin-top: 28px;
     margin-bottom: 12px;
+}
+
+img.full {
+    width: 100%;
+    border-radius: 10px;
+    margin: 16px 0;
+    box-shadow: 0 0 14px rgba(0,0,0,0.6);
 }
 
 /* Távolságmérő */
@@ -117,13 +123,6 @@ h2 {
     h1 { font-size: 26px; }
     p { font-size: 17px; }
 }
-
-img.full {
-    width: 100%;
-    border-radius: 10px;
-    margin: 16px 0;
-    box-shadow: 0 0 14px rgba(0,0,0,0.6);
-}
 </style>
 </head>
 
@@ -139,3 +138,136 @@ img.full {
     </span>
 </div>
 
+<!-- ───────────────────────────────────────────── -->
+<!--                TÖRTÉNETI LEÍRÁS               -->
+<!-- ───────────────────────────────────────────── -->
+
+<h2>Az Óvár, a város ősi őrtornya</h2>
+
+<p>Az Óvár Selmecbánya egyik legkorábbi erődítménye, egy őrtoronyból továbbfejlesztett kis vár, 
+amely évszázadokon át vigyázta a völgyeket, a bányászfalvakat és a városba vezető utakat. 
+Eredetileg jelzőtoronynak épült: innen adták le a tűzjelzést, a rablótámadások hírét, 
+vagy a gyorsan terjedő bányaomlások figyelmeztetését.</p>
+
+<img src="ovar4.jpg" class="full">
+
+<p>A török időkben megerősítették, és falai mögött kisebb helyőrség állomásozott.  
+A magaslat és a kilátás miatt nemcsak katonai pont volt:  
+a bányatisztek is innen kémlelték a völgyben húzódó aknák szellőzőnyílásait.  
+Ha valahol túl sok gőz vagy por szállt fel, az rossz előjel volt:  
+messziről is látszott, hogy baj van a föld alatt.</p>
+
+<img src="ovar2.jpg" class="full">
+
+<p>A vár udvarán ma is érezni azt a különös csendet, amelyet a hegyek adnak.  
+A kövek között mintha ott maradt volna a régi bányaváros lépteinek visszhangja.</p>
+
+<img src="ovar.jpg" class="full">
+
+<!-- ───────────────────────────────────────────── -->
+<!--                A REJTVÉNY RÉSZE               -->
+<!-- ───────────────────────────────────────────── -->
+
+<h2>A magaslat titkos üzenete</h2>
+
+<p>A kapunak hátat fordítva, a tér felé nézve menjetek az első kandelláberig.  
+Innen tárul fel a város jellegzetes tornyokkal tagolt látképe.  
+A feladatotok az, hogy figyelmesen nézzetek körül, és a látvány alapján 
+alkossatok meg magatoknak egy betűsort.  
+A betűk forrását nem áruljuk el – azt nektek kell felismerni.</p>
+
+<p class="highlight" style="text-align:center;">
+Ez az öt betű lesz a rejtvény alapja.  
+Őrizzétek meg, mert a következő lépésben kell használni!
+</p>
+
+<h2>A feladvány</h2>
+
+<p>Amint megvan az öt betűtök, helyettesítsétek be őket a lenti 
+rejtvénykártyába. Ha jól dolgoztatok, egy értelmes magyar szó jelenik meg –  
+egy olyan szó, amely egy ősi magyar kutyafajtára utal.</p>
+
+<img src="kuvaszok.jpg" class="full">
+
+<p>A környék hegyi legelőin régen pásztorok jártak, és mellettük mindig ott voltak 
+a fehér őrzők, akik a farkastól, medvétől, tolvajtól egyaránt megvédték a nyájat.  
+Bátorságukról és hűségükről egész legendák születtek a Felvidéken.</p>
+
+<p class="highlight" style="text-align:center;">
+Aki megfejti a rejtvényt, megkapja a következő állomás,  
+a „Luther rózsája” titkos kulcsát.
+</p>
+
+<!-- ───────────────────────────────────────────── -->
+<!--                GOMBOK                         -->
+<!-- ───────────────────────────────────────────── -->
+
+<div class="nav-wrapper">
+    <a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" 
+       target="_blank" class="navbtn">
+        📍 Navigáció az Óvárhoz
+    </a>
+    <br>
+    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+</div>
+
+</div>
+
+<!-- ───────────────────────────────────────────── -->
+<!--                GPS SCRIPT                     -->
+<!-- ───────────────────────────────────────────── -->
+
+<script>
+const targetLat = 48.459336407159405;
+const targetLon = 18.891808326726757;
+
+const distBtn  = document.getElementById("distBtn");
+const distText = document.getElementById("distText");
+
+// Haversine
+function distanceMeters(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat/2)**2 +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon/2)**2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
+function formatDistance(m) {
+    if (m < 5) return "Már szinte a vár kapujánál vagytok!";
+    if (m < 1000) return m.toFixed(0) + " méter";
+    return (m/1000).toFixed(2) + " km";
+}
+
+distBtn.addEventListener("click", function () {
+    if (!("geolocation" in navigator)) {
+        distText.textContent = "A böngésző nem támogatja a GPS-t.";
+        return;
+    }
+
+    distText.textContent = "Helyzet lekérése...";
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        const dist = distanceMeters(lat, lon, targetLat, targetLon);
+        distText.textContent =
+            "Jelenlegi távolság a vár kapujától: " + formatDistance(dist);
+    }, function () {
+        distText.textContent =
+            "Nem sikerült lekérni a pozíciót. Ellenőrizd a GPS-t!";
+    }, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+    });
+});
+</script>
+
+</body>
+</html>
