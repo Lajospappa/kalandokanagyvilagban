@@ -179,11 +179,46 @@ Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze v
 </span>
 </div>
 
-<!-- 🔽 A TE TELJES SZÖVEGED MARAD VÁLTOZATLANUL -->
-<p>Az <span class="highlight">Óvár</span>, vagyis a régi vár Selmecbánya egyik legősibb őrhelye...
-(ide kerül az összes eredeti bekezdésed, ahogy neked volt)
+<!-- ====================== -->
+<!--       TELJES SZÖVEG    -->
+<!-- ====================== -->
+
+<p>
+Képzeld el, ahogy a meredek dombon kapaszkodsz felfelé, és hirtelen előtted magasodik a város egyik legősibb őrzője: az Óvár. 
+Nem egyszerű kőfalak ezek – minden köve évszázadok történeteit suttogja.
+Eredetileg román stílusú bazilikaként emelték a templomosok a XIII. században, ám a történelem vihara hamar más szerepet szánt neki.
+A török veszedelem idején a szentélyből várkápolna, az oldalhajókból kaszárnyák, a toronyból őrtorony lett.
+A templom mennyezete eltűnt, helyén udvar nyílt, ahol katonák készültek a védelemre.
 </p>
 
+<p>
+Ahogy belépsz a kapun, mintha egy másik világba lépnél. 
+A Szent Mihály-kápolna csontkamrája baljósan őrzi a múlt árnyait, 
+a zegzugos átjárók pedig titkos ösvényként vezetnek fel a toronyba. 
+Ott, a hatalmas harangok mellett, a város panorámája tárul eléd: a kálvária, a bányászváros háztetői, 
+és a környező hegyek, amelyek évszázadokon át rejtegették az aranyat és ezüstöt.
+</p>
+
+<p>
+De az Óvár nem csupán erőd volt. A falak között titkos pénzverde is működött, ahol a királyi kincstár számára vertek érméket. 
+A legenda szerint a torony mélyén még ma is rejlik egy elfeledett kamra, tele régi szerszámokkal és elásott kincsekkel. 
+A XIX. században pedig igazi multifunkciós épületként szolgált: volt itt levéltár, könyvtár, sőt még a városi rendőrség is helyet kapott.
+</p>
+
+<p>
+És most jön a történet egyik legérdekesebb – és legszórakoztatóbb – része:  
+hiába erősítették meg bástyákkal az Óvárt, **olyan helyre építették**, hogy a fölé magasodó **Paradicsom-hegyről a törökök simán szét tudták ágyúzni**.  
+Ez finoman szólva is stratégiai baklövés volt…  
+Mintha valaki azt mondta volna: „Építsünk várat! Oda, ahol magasabbról simán rálőnek!”  
+A törökök pedig éltek is a lehetőséggel – a Paradicsom-hegyi ágyúállásokból gyakorlatilag felsőpályáról célozhatták a várat.
+</p>
+
+<p>
+Az Óvár így lett egyszerre erős és sebezhető – egy különös ellentmondás, ami ma is érezhető a falak között. 
+Mintha maga az épület is rejtvény lenne: templom, vár, múzeum, titkos pénzverde… mindez egyetlen falak közé zárva.
+</p>
+
+<!-- Ide jönnek az eredeti képek -->
 <img src="ovar 4.jpg" class="photo">
 <img src="ovar 2.jpg" class="photo">
 <img src="ovar.jpg" class="photo">
@@ -203,6 +238,9 @@ Engedélyezd a helymeghatározást a böngészőben, hogy lásd, milyen messze v
 <button onclick="kov()">⏩ +10 mp</button>
 </div>
 
+<!-- ================================ -->
+<!--      SCRIPT — KÖVETKEZŐ ÜZENET  -->
+<!-- ================================ -->
 <!-- ================================= -->
 <!-- 🔊 TELJES, iPHONE-KOMPATIBILIS TTS -->
 <!-- ================================= -->
@@ -212,6 +250,7 @@ let paused = false;
 let fullText = "";
 let magyarHang = null;
 
+// 🔥 Magyar hang betöltése (iPhone-nál kötelező)
 function hangBetoltes() {
     const voices = speechSynthesis.getVoices();
     magyarHang = voices.find(v =>
@@ -223,6 +262,7 @@ function hangBetoltes() {
 speechSynthesis.onvoiceschanged = hangBetoltes;
 hangBetoltes();
 
+// 🔎 teljes szöveg kigyűjtése
 function getText() {
     const container = document.querySelector(".container");
     let text = "";
@@ -232,20 +272,25 @@ function getText() {
     return text;
 }
 
+// 🔊 Felolvasás indítása
 function felolvas() {
     speechSynthesis.cancel();
     paused = false;
 
     fullText = getText();
     utterance = new SpeechSynthesisUtterance(fullText);
+
+    // magyar hang beállítása
     utterance.lang = "hu-HU";
     if (magyarHang) utterance.voice = magyarHang;
 
     speechSynthesis.speak(utterance);
 }
 
+// ⏸ Szünet / ▶ Folytatás
 function szunetFolytat() {
     if (!utterance) return;
+
     if (!paused) {
         speechSynthesis.pause();
         paused = true;
@@ -255,11 +300,13 @@ function szunetFolytat() {
     }
 }
 
+// ⛔ Leállítás
 function leallit() {
     speechSynthesis.cancel();
     paused = false;
 }
 
+// ⏪ vissza (10% ugrás)
 function elozo() {
     if (!fullText) return;
     speechSynthesis.cancel();
@@ -274,6 +321,7 @@ function elozo() {
     speechSynthesis.speak(utterance);
 }
 
+// ⏩ előre (10% ugrás)
 function kov() {
     if (!fullText) return;
     speechSynthesis.cancel();
@@ -301,7 +349,7 @@ function distanceMeters(lat1, lon1, lat2, lon2) {
     const a = Math.sin(dLat/2)**2 +
               Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*
               Math.sin(dLon/2)**2;
-    return 2*R*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return 2*R*Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) * R;
 }
 
 function formatDistance(m) {
