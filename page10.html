@@ -2,70 +2,131 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Koronázás – Kód bekérés</title>
+<title>10. PONT – Koronázás</title>
+
+<!-- Mobil optimalizálás -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
     font-family: 'Georgia', serif;
-    background: #faf3e3;
+    background: url('háziko3.jpg') center/cover no-repeat fixed;
     margin: 0;
-    padding: 30px 20px;
+    padding: 0;
+    color: #f5f5f5;
 }
+
+/* középső doboz */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: rgba(0, 0, 0, 0.70);
+    padding: 24px 20px 30px 20px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+/* cím */
 h2 {
-    font-size: 28px;
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 14px;
     text-align: center;
-    margin-bottom: 20px;
+    color: #ffe7a3;
 }
+
+/* szöveg */
 p {
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.6;
+    margin-bottom: 16px;
     text-align: center;
 }
-input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    font-size: 18px;
-    border: 1px solid #aaa;
-    border-radius: 6px;
+
+/* input + gomb */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 16px;
+    text-align: center;
 }
-button {
+
+input[type="text"] {
     width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
     margin-top: 12px;
-    padding: 12px;
     font-size: 18px;
     font-weight: bold;
-    background: #ffe28a;
+    font-family: inherit;
+    text-align: center;
+    border-radius: 10px;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    background: #ffe7a3;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
-button:active {
+
+.btn:active {
     transform: scale(0.98);
 }
+
+/* hibaüzenet */
+#error {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #ffb3b3;
+    text-align: center;
+}
+
+/* főoldal link */
 .home-btn {
-    display:block;
-    text-align:center;
-    margin-top:20px;
-    padding:10px 14px;
-    background:#e6e6e6;
-    color:#333;
-    text-decoration:none;
-    font-weight:bold;
-    border-radius:6px;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 14px;
+    background: #e6e6e6;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* Mobil finomhangolás */
+@media (max-width: 480px) {
+    .container {
+        margin: 20px 10px;
+        padding: 20px 14px 24px 14px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    p, .btn, input[type="text"] {
+        font-size: 17px;
+    }
 }
 </style>
 
 <script>
 function check() {
-    var v = document.getElementById("code").value.trim().toLowerCase();
+    var v = document.getElementById("code").value.trim();
 
-    if (v === "10" || v === "tíz" || v === "tiz") {
+    if (v === "10") {
         window.location.href = "content10.html";
     } else {
-        alert("Hibás kód!");
+        document.getElementById("error").textContent =
+            "Hibás kód. Gondoljatok vissza: mi volt a 9. pont megoldása?";
     }
 }
 </script>
@@ -73,15 +134,21 @@ function check() {
 
 <body>
 
-<h2>10. PONT – Koronázás</h2>
+<div class="container">
+    <h2>10. PONT – Koronázás</h2>
 
-<p>Add meg a kulcsot,  
-amelyet az előző állomáson kellett megtalálnotok.</p>
+    <p>Az előző állomáson talált kulcs egyértelműen ide vezetett benneteket.  
+    Ha jól emlékeztek a megadott számra, már beléphettek a végső fejezetbe.</p>
 
-<input id="code" type="text" autocomplete="off" placeholder="Írd be a kulcsot...">
-<button onclick="check()">Tovább</button>
+    <label for="code">Írd be a kulcsot (szám formában):</label>
+    <input id="code" type="text" autocomplete="off" placeholder="Kulcs...">
 
-<a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+    <button class="btn" onclick="check()">➜ Tovább a végső tartalomhoz</button>
+
+    <div id="error"></div>
+
+    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+</div>
 
 </body>
 </html>
