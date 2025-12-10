@@ -1,1 +1,217 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Velence teszt – térképes piros pötty</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #111;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #ffe7a3;
+    }
+
+    p {
+      margin: 6px 0;
+    }
+
+    .controls {
+      margin-bottom: 15px;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 15px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      margin: 2px 4px;
+      background: #ffe7a3;
+      color: #2b1b0c;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #status {
+      font-size: 14px;
+      margin-top: 4px;
+      min-height: 1.2em;
+    }
+
+    .map-wrapper {
+      margin: 15px auto 0 auto;
+      display: inline-block;
+      position: relative;
+      max-width: 100%;
+      border: 2px solid #444;
+      box-shadow: 0 0 12px rgba(0,0,0,0.7);
+    }
+
+    #mapImage {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    #marker {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: red;
+      border: 2px solid #fff;
+      box-shadow: 0 0 8px rgba(0,0,0,0.8);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Velence – térképteszt</h1>
+
+  <div class="controls">
+    <button id="gpsBtn">GPS követés indítása</button>
+    <button data-test="rozi">Ugorj Rozi ABC-re (teszt)</button>
+    <button data-test="home">Ugorj Home-ra (teszt)</button>
+    <button data-test="kilato">Ugorj Kilátóra (teszt)</button>
+    <div id="status">Nyomd meg a gombot, és engedélyezd a helymeghatározást.</div>
+  </div>
+
+  <div class="map-wrapper">
+    <!-- Itt legyen az a screenshot, amiből a pixeleket mértük -->
+    <img id="mapImage" src="velence-map.png" alt="Velence-térkép">
+    <div id="marker"></div>
+  </div>
+
+  <script>
+    // GPS koordináták
+    const ROZI = { lat: 47.21436959046697, lon: 18.532712243580217 };
+    const HOME = { lat: 47.217187542181215, lon: 18.543071657736164 };
+    const KILATO = { lat: 47.24863960067864, lon: 18.624810193654724 };
+
+    // Képpont koordináták (az eredeti screenshotban)
+    // Rozi: (54, 676)
+    // Home: (184, 627)
+    // Kilátó: (1186, 50)
+    //
+    // A lat/lon -> x/y átszámítás affin leképezéssel.
+    // Ezeket a konstansokat a három pontból számoltuk ki.
+    const A11 = -2574.9039650585;
+    const A12 = 13249.3935444758;
+    const B1  = -123920.730495488;
+    const A21 = -20653.4808101966;
+    const A22 =   888.130498081812;
+    const B2  = 959357.609346542;
+
+    const gpsBtn = document.getElementById("gpsBtn");
+    const statusEl = document.getElementById("status");
+    const mapImage = document.getElementById("mapImage");
+    const marker = document.getElementById("marker");
+    const mapWrapper = document.querySelector(".map-wrapper");
+
+    let baseWidth = null;
+    let baseHeight = null;
+    let watchId = null;
+
+    // Ha az image betöltődött, eltároljuk az eredeti (natural) méretét
+    mapImage.addEventListener("load", () => {
+      baseWidth = mapImage.naturalWidth;
+      baseHeight = mapImage.naturalHeight;
+    });
+
+    function latLonToXY(lat, lon) {
+      const x = A11 * lat + A12 * lon + B1;
+      const y = A21 * lat + A22 * lon + B2;
+      return { x, y };
+    }
+
+    function placeMarkerOriginalPixels(xOrig, yOrig) {
+      if (!baseWidth || !baseHeight) return;
+
+      // Jelenlegi megjelenített méret (mobilon kisebb, asztalin nagyobb)
+      const displayWidth = mapWrapper.clientWidth;
+      const displayHeight = mapWrapper.clientHeight;
+
+      const scaleX = displayWidth / baseWidth;
+      const scaleY = displayHeight / baseHeight;
+
+      const x = xOrig * scaleX;
+      const y = yOrig * scaleY;
+
+      marker.style.left = x + "px";
+      marker.style.top = y + "px";
+    }
+
+    function updateMarkerFromLatLon(lat, lon, label) {
+      const { x, y } = latLonToXY(lat, lon);
+      placeMarkerOriginalPixels(x, y);
+      statusEl.textContent =
+        (label ? label + " – " : "") +
+        "lat: " + lat.toFixed(6) +
+        ", lon: " + lon.toFixed(6);
+    }
+
+    function onPosition(pos) {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      updateMarkerFromLatLon(lat, lon, "GPS pozíció");
+    }
+
+    function onError(err) {
+      statusEl.textContent =
+        "Nem sikerült lekérni a helyzetet. Ellenőrizd a GPS / jogosultság beállításokat. (" +
+        err.message + ")";
+    }
+
+    gpsBtn.addEventListener("click", () => {
+      if (!("geolocation" in navigator)) {
+        statusEl.textContent = "A böngésző nem támogatja a helymeghatározást.";
+        return;
+      }
+
+      if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        gpsBtn.textContent = "GPS követés indítása";
+        statusEl.textContent = "GPS követés leállítva.";
+        return;
+      }
+
+      gpsBtn.textContent = "GPS követés leállítása";
+      statusEl.textContent = "Helyzet lekérése...";
+
+      watchId = navigator.geolocation.watchPosition(onPosition, onError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+      });
+    });
+
+    // Tesztgombok – GPS nélkül is kipróbálható
+    document.querySelectorAll("button[data-test]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const type = btn.getAttribute("data-test");
+        if (type === "rozi") {
+          updateMarkerFromLatLon(ROZI.lat, ROZI.lon, "Rozi ABC (teszt)");
+        } else if (type === "home") {
+          updateMarkerFromLatLon(HOME.lat, HOME.lon, "Home (teszt)");
+        } else if (type === "kilato") {
+          updateMarkerFromLatLon(KILATO.lat, KILATO.lon, "Kilátó (teszt)");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
 
