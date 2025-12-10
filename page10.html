@@ -2,18 +2,86 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>Velvet Interior – Belépés</title>
+<title>Koronázás – Kód bekérés</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
     font-family: 'Georgia', serif;
-    background: #f7f0e6;
+    background: #faf3e3;
     margin: 0;
-    padding: 35px 20px;
+    padding: 30px 20px;
 }
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: rgba(255,255,255,0.9);
-    padding: 28
+h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+}
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 18px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #ffe28a;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+button:active {
+    transform: scale(0.98);
+}
+.home-btn {
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    padding:10px 14px;
+    background:#e6e6e6;
+    color:#333;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:6px;
+}
+</style>
+
+<script>
+function check() {
+    var v = document.getElementById("code").value.trim().toLowerCase();
+
+    if (v === "10" || v === "tíz" || v === "tiz") {
+        window.location.href = "content10.html";
+    } else {
+        alert("Hibás kód!");
+    }
+}
+</script>
+</head>
+
+<body>
+
+<h2>10. PONT – Koronázás</h2>
+
+<p>Add meg a kulcsot,  
+amelyet az előző állomáson kellett megtalálnotok.</p>
+
+<input id="code" type="text" autocomplete="off" placeholder="Írd be a kulcsot...">
+<button onclick="check()">Tovább</button>
+
+<a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+
+</body>
+</html>
