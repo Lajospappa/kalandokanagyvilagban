@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <title>8. PONT – Vár ahonnan minden torony látszik</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body {
     font-family: 'Georgia', serif;
@@ -16,17 +14,17 @@ body {
 }
 
 .container {
-    max-width: 720px;
+    max-width: 700px;
     margin: auto;
-    background: rgba(0,0,0,0.60);
-    padding: 32px 26px;
-    border-radius: 14px;
-    box-shadow: 0 0 24px rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.68);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
 }
 
 h1 {
     font-size: 32px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     text-align: center;
     color: #ffe7a3;
 }
@@ -34,7 +32,7 @@ h1 {
 p {
     line-height: 1.6;
     font-size: 18px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .highlight {
@@ -43,25 +41,39 @@ p {
 }
 
 h2 {
-    text-align: center;
     color: #ffe7a3;
+    text-align: center;
     margin-top: 28px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
-img.full {
-    width: 100%;
+.photo {
+    display: block;
+    max-width: 100%;
     border-radius: 10px;
-    margin: 16px 0;
-    box-shadow: 0 0 14px rgba(0,0,0,0.6);
+    margin: 18px auto;
+    box-shadow: 0 0 18px rgba(0,0,0,0.7);
 }
 
-/* Távolságmérő */
+.navbtn {
+    display:inline-block;
+    margin: 8px 0 10px 0;
+    padding: 8px 14px;
+    background:#68c7ff;
+    color:#033048;
+    font-weight:bold;
+    font-size:14px;
+    border-radius:7px;
+    text-decoration:none;
+    box-shadow:0 0 8px rgba(0,0,0,0.4);
+}
+
 .distance-box {
-    margin: 0 0 26px 0;
-    padding: 12px 16px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.10);
+    margin: 8px 0 22px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
     text-align: center;
 }
 
@@ -69,7 +81,7 @@ img.full {
     font-family: inherit;
     font-size: 16px;
     padding: 8px 14px;
-    border-radius: 7px;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
     background: #ffe7a3;
@@ -78,48 +90,38 @@ img.full {
     box-shadow: 0 0 8px rgba(0,0,0,0.5);
 }
 
-.distance-status {
-    display: block;
-    margin-top: 6px;
-    font-size: 15px;
+.read-btn, .stop-btn {
+    display: inline-block;
+    margin: 10px 8px 18px 8px;
+    padding: 10px 18px;
+    background: #ffe7a3;
+    color: #2b1b0c;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 16px;
 }
 
-/* Navigáció – kék */
-.nav-wrapper {
-    text-align: center;
-    margin-top: 24px;
-}
-
-.navbtn {
-    display:inline-block;
-    padding:10px 16px;
-    background:#68c7ff;
-    color:#033048;
-    font-weight:bold;
-    font-size:15px;
-    border-radius:7px;
-    text-decoration:none;
-    box-shadow:0 0 8px rgba(0,0,0,0.4);
-}
-
-/* Vissza gomb */
 .home-btn {
-    display:inline-block;
-    margin-top: 16px;
-    padding:10px 18px;
-    background:#ffe7a3;
-    color:#333;
-    font-weight:bold;
-    border-radius:8px;
-    text-decoration:none;
-    font-size:16px;
-    box-shadow:0 0 10px rgba(0,0,0,0.5);
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 20px;
+    background: #ffe7a3;
+    color: #333;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 16px;
 }
 
-/* Mobil */
+.home-wrapper { text-align: center; }
+
 @media (max-width: 480px) {
-    body { padding: 20px 12px; }
-    .container { padding: 26px 18px; }
+    body { padding: 20px 10px; }
+    .container { padding: 22px 16px; }
     h1 { font-size: 26px; }
     p { font-size: 17px; }
 }
@@ -127,147 +129,92 @@ img.full {
 </head>
 
 <body>
+
 <div class="container">
 
 <h1>8. PONT – Vár ahonnan minden torony látszik</h1>
 
+<button class="read-btn" onclick="felolvas()">🔊 Felolvasás</button>
+<button class="stop-btn" onclick="stopRead()">⛔ Leállítás</button>
+
+<a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" target="_blank" class="navbtn">
+📍 Navigáció az Óvár kapujához
+</a>
+
 <div class="distance-box">
-    <button id="distBtn">Távolság mérése (GPS)</button>
-    <span id="distText" class="distance-status">
-        Engedélyezd a helymeghatározást, hogy megtudd milyen messze vagytok a vár kapujától.
-    </span>
+<button id="distBtn">Távolság mérése (GPS)</button>
+<span id="distText" class="distance-status">
+Engedélyezd a helymeghatározást a böngészőben.
+</span>
 </div>
 
-<!-- ───────────────────────────────────────────── -->
-<!--                TÖRTÉNETI LEÍRÁS               -->
-<!-- ───────────────────────────────────────────── -->
+<!-- ====================== -->
+<!--   TELJES BŐVÍTETT SZÖVEG -->
+<!-- ====================== -->
 
-<h2>Az Óvár, a város ősi őrtornya</h2>
+<p>Képzeld el, ahogy a meredek dombon kapaszkodsz felfelé, és egyszer csak előtted tornyosul Selmecbánya egyik legősibb őrzője: az Óvár. Nem egyszerű kőfal ez: minden egyes köve régi idők emlékét őrzi. A XIII. században még román stílusú templomként állt, a templomosok keze munkája nyomán. A történelem azonban nem hagyta érintetlenül: a török fenyegetés idején a szentélyből várkápolna, az oldalhajókból pedig kaszárnyák lettek.</p>
 
-<p>Az Óvár Selmecbánya egyik legkorábbi erődítménye, egy őrtoronyból továbbfejlesztett kis vár, 
-amely évszázadokon át vigyázta a völgyeket, a bányászfalvakat és a városba vezető utakat. 
-Eredetileg jelzőtoronynak épült: innen adták le a tűzjelzést, a rablótámadások hírét, 
-vagy a gyorsan terjedő bányaomlások figyelmeztetését.</p>
+<p>Ahogy belépsz a kapun – mintha átlépnél egy határvonalat. A Szent Mihály-kápolna csontkamrája suttogó csönddel fogad. A szűk átjárókon át feljutsz a toronyba, ahol a harangok között ott zúg a város ezeréves lehelete. Innen látszik a kálvária, a bányászfalvak és a környező hegyek, amelyek hosszú évszázadokon át ezüstöt és aranyat rejtettek.</p>
 
-<img src="ovar4.jpg" class="full">
+<p>A vár falai között egykor titkos pénzverde működött: éjszakánként csengő fémhang kísérte a királyi érmék születését. A legenda szerint a torony alatt ma is létezik egy lezárt kamra elásott kincsekkel.</p>
 
-<p>A török időkben megerősítették, és falai mögött kisebb helyőrség állomásozott.  
-A magaslat és a kilátás miatt nemcsak katonai pont volt:  
-a bányatisztek is innen kémlelték a völgyben húzódó aknák szellőzőnyílásait.  
-Ha valahol túl sok gőz vagy por szállt fel, az rossz előjel volt:  
-messziről is látszott, hogy baj van a föld alatt.</p>
+<p>Ám az Óvár történetének legérdekesebb – és legkomikusabb – epizódja az építők baklövése. Nem vették észre, hogy a közeli Paradicsom-hegy magasabbról néz le rá. A törökök pedig gyorsan felfedezték a hibát: egyszerűen felvitték az ágyúikat a hegy tetejére, és FENTRŐL kezdték el ágyúzni az Óvárat. A vár védhetetlenné vált – hiába volt erős, rossz helyre épült. A helyiek később úgy mondták: „A vár kemény volt, csak a hegy volt keményebb nála.”</p>
 
-<img src="ovar2.jpg" class="full">
+<p>Az Óvár mégis áll. Templom, erőd, kaszárnya, levéltár, múzeum – és most újra játék. A falai között most a ti feladatotok következő kulcsa rejtőzik.</p>
 
-<p>A vár udvarán ma is érezni azt a különös csendet, amelyet a hegyek adnak.  
-A kövek között mintha ott maradt volna a régi bányaváros lépteinek visszhangja.</p>
+<h2>A feladat</h2>
 
-<img src="ovar.jpg" class="full">
+<p>Forduljatok háttal a kapunak, sétáljatok a <span class="highlight">kandelláberig</span>, és nézzetek le a városra. A látványban öt jellegzetes torony bukkan fel. Vegyétek sorra őket balról jobbra, és írjátok fel a nevük első betűjét.</p>
 
-<!-- ───────────────────────────────────────────── -->
-<!--                A REJTVÉNY RÉSZE               -->
-<!-- ───────────────────────────────────────────── -->
+<p>Ha helyes a sorrend, a betűk ezt adják ki: egy ősi magyar pásztorkutya nevét. Ez a kulcs a 9. ponthoz vezető kapuhoz.</p>
 
-<h2>A magaslat titkos üzenete</h2>
+<img src="kuvaszok.jpg" class="photo">
 
-<p>A kapunak hátat fordítva, a tér felé nézve menjetek az első kandelláberig.  
-Innen tárul fel a város jellegzetes tornyokkal tagolt látképe.  
-A feladatotok az, hogy figyelmesen nézzetek körül, és a látvány alapján 
-alkossatok meg magatoknak egy betűsort.  
-A betűk forrását nem áruljuk el – azt nektek kell felismerni.</p>
-
-<p class="highlight" style="text-align:center;">
-Ez az öt betű lesz a rejtvény alapja.  
-Őrizzétek meg, mert a következő lépésben kell használni!
+<p class="highlight" style="text-align:center; font-size:20px;">
+A megfejtés egy magyar pásztorkutya neve.<br>
+Ez nyitja a 9. pontot.
 </p>
 
-<h2>A feladvány</h2>
-
-<p>Amint megvan az öt betűtök, helyettesítsétek be őket a lenti 
-rejtvénykártyába. Ha jól dolgoztatok, egy értelmes magyar szó jelenik meg –  
-egy olyan szó, amely egy ősi magyar kutyafajtára utal.</p>
-
-<img src="kuvaszok.jpg" class="full">
-
-<p>A környék hegyi legelőin régen pásztorok jártak, és mellettük mindig ott voltak 
-a fehér őrzők, akik a farkastól, medvétől, tolvajtól egyaránt megvédték a nyájat.  
-Bátorságukról és hűségükről egész legendák születtek a Felvidéken.</p>
-
-<p class="highlight" style="text-align:center;">
-Aki megfejti a rejtvényt, megkapja a következő állomás,  
-a „Luther rózsája” titkos kulcsát.
-</p>
-
-<!-- ───────────────────────────────────────────── -->
-<!--                GOMBOK                         -->
-<!-- ───────────────────────────────────────────── -->
-
-<div class="nav-wrapper">
-    <a href="https://maps.app.goo.gl/PnuYSpeaQuLy6DPv7" 
-       target="_blank" class="navbtn">
-        📍 Navigáció az Óvárhoz
-    </a>
-    <br>
-    <a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
+<div class="home-wrapper">
+<a href="index.html" class="home-btn">⬅ Vissza a főoldalra</a>
 </div>
 
 </div>
 
-<!-- ───────────────────────────────────────────── -->
-<!--                GPS SCRIPT                     -->
-<!-- ───────────────────────────────────────────── -->
+<!-- SCRIPT A KÖVETKEZŐ ÜZENETBEN -->
+<!-- Ultra-egyszerű szövegfelolvasó -->
+<div style="text-align:center; margin-top:25px;">
+    <button onclick="speakText()" 
+            style="padding:10px 18px; font-size:16px; border-radius:8px; border:none; background:#ffe7a3; cursor:pointer;">
+        🔊 Felolvasás
+    </button>
+
+    <button onclick="stopSpeaking()" 
+            style="padding:10px 18px; font-size:16px; border-radius:8px; border:none; background:#ffb4b4; cursor:pointer; margin-left:10px;">
+        ⛔ Leállítás
+    </button>
+</div>
 
 <script>
-const targetLat = 48.459336407159405;
-const targetLon = 18.891808326726757;
+let utterance;
 
-const distBtn  = document.getElementById("distBtn");
-const distText = document.getElementById("distText");
+// Felolvasás
+function speakText() {
+    const element = document.querySelector('.container'); 
+    const text = element.innerText || element.textContent;
 
-// Haversine
-function distanceMeters(lat1, lon1, lat2, lon2) {
-    const R = 6371000;
-    const toRad = x => x * Math.PI / 180;
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-    const a =
-        Math.sin(dLat/2)**2 +
-        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-        Math.sin(dLon/2)**2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
+    if (utterance) window.speechSynthesis.cancel();
+
+    utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "hu-HU";
+    utterance.rate = 1;        // tempó
+    utterance.pitch = 1;       // hangmagasság
+
+    window.speechSynthesis.speak(utterance);
 }
 
-function formatDistance(m) {
-    if (m < 5) return "Már szinte a vár kapujánál vagytok!";
-    if (m < 1000) return m.toFixed(0) + " méter";
-    return (m/1000).toFixed(2) + " km";
+// Stop
+function stopSpeaking() {
+    window.speechSynthesis.cancel();
 }
-
-distBtn.addEventListener("click", function () {
-    if (!("geolocation" in navigator)) {
-        distText.textContent = "A böngésző nem támogatja a GPS-t.";
-        return;
-    }
-
-    distText.textContent = "Helyzet lekérése...";
-
-    navigator.geolocation.getCurrentPosition(function (pos) {
-        const lat = pos.coords.latitude;
-        const lon = pos.coords.longitude;
-        const dist = distanceMeters(lat, lon, targetLat, targetLon);
-        distText.textContent =
-            "Jelenlegi távolság a vár kapujától: " + formatDistance(dist);
-    }, function () {
-        distText.textContent =
-            "Nem sikerült lekérni a pozíciót. Ellenőrizd a GPS-t!";
-    }, {
-        enableHighAccuracy: true,
-        maximumAge: 5000,
-        timeout: 10000
-    });
-});
 </script>
-
-</body>
-</html>
