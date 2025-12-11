@@ -2,148 +2,94 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
-<title>A Varázslók Térképe – Selmecbánya</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selmecbánya Kincskereső</title>
 
-<!-- Leaflet -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Mobil optimalizálás -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
-    margin: 0;
-    padding: 0;
-    background: #f3e9d4 url('https://i.imgur.com/Qr8fiLZ.jpg') repeat;
     font-family: Georgia, serif;
-    color: #3b2f2f;
-}
-
-/* Cím */
-h1 {
-    font-size: 40px;
-    text-align: center;
-    margin: 20px 0;
-    color: #4b2e0f;
-    text-shadow: 2px 2px 4px #d4c2a0;
-    letter-spacing: 2px;
-}
-
-/* Felső interaktív térkép */
-#map {
-    width: 100%;
-    height: 55vh;
-    border: 5px solid #4b2e0f;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    margin-bottom: 20px;
-}
-
-/* Konténer */
-.container {
-    display: flex;
-    flex-direction: column;
+    background: url('Ovar-Selmecbanya-2048x1366.jpg') center/cover no-repeat fixed;
     padding: 20px;
+    margin: 0;
 }
 
-/* Lista */
-.point-list {
-    background: rgba(255,245,225,0.85);
-    border: 4px solid #4b2e0f;
+/* háttér mögé enyhe elsötétítés az olvashatóságért */
+.overlay {
+    background: rgba(245, 242, 234, 0.88);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* Grid – mobil first */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;       
+    gap: 20px;
+}
+
+/* Tablet méret */
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop méret */
+@media (min-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.item {
+    background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
 }
 
-.point-item {
-    padding: 12px;
-    background: rgba(255,255,255,0.7);
-    border-left: 4px solid #8b5a2b;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: .2s;
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
-.point-item:hover {
-    background: #f6e6c9;
-    transform: translateX(6px);
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Selmecbánya – A Varázslók Térképe</h1>
+<div class="overlay">
 
-<!-- INTERAKTÍV TÉRKÉP -->
-<div id="map"></div>
+<h1>Selmecbánya Kincskereső</h1>
 
-<div class="container">
-    <div class="point-list">
-        <div class="point-item" onclick="goTo(1)">1. Szent Katalin templom</div>
-        <div class="point-item" onclick="goTo(2)">2. Velvet Interior</div>
-        <div class="point-item" onclick="goTo(3)">3. Monarchia Restaurant</div>
-        <div class="point-item" onclick="goTo(4)">4. Kopogtató ház</div>
-        <div class="point-item" onclick="goTo(5)">5. Glanzenberg-tárna</div>
-        <div class="point-item" onclick="goTo(6)">6. Városháza</div>
-        <div class="point-item" onclick="goTo(7)">7. Moja Marína kávézó</div>
-        <div class="point-item" onclick="goTo(8)">8. Rubigall ház</div>
-        <div class="point-item" onclick="goTo(9)">9. Óvár</div>
-        <div class="point-item" onclick="goTo(10)">10. Szentháromság tér</div>
-        <div class="point-item" onclick="goTo(11)">11. Városkapu</div>
-        <div class="point-item" onclick="goTo(12)">12. Újvár</div>
-        <div class="point-item" onclick="goTo(13)">13. Reštaurácia Matej</div>
-        <div class="point-item" onclick="goTo(14)">14. Bányamúzeum</div>
-        <div class="point-item" onclick="goTo(15)">15. Love Bank</div>
-    </div>
+<div class="grid">
+
+<div class="item"><a href="page1.html">🔍 1. Moja Marína kávézó</a></div>
+<div class="item"><a href="page2.html">🔍 2. Aranyrög</a></div>
+<div class="item"><a href="page3.html">🔍 3. Út a város szívébe</a></div>
+<div class="item"><a href="page4.html">🔍 4. Matyi pincéje</a></div>
+<div class="item"><a href="page5.html">🔍 5. Úrnő palotája</a></div>
+<div class="item"><a href="page6.html">🔍 6. Mennyei család</a></div>
+<div class="item"><a href="page7.html">🔍 7. Ahol papi nem tanított</a></div>
+<div class="item"><a href="page8.html">🔍 8. Vár ahonnan minden torony látszik</a></div>
+<div class="item"><a href="page9.html">🔍 9. Luther rózsája</a></div>
+<div class="item"><a href="page10.html">🔍 10. Koronázás</a></div>
+
+<!-- ITT NYÍLIK A TÉRKÉPES OLDAL -->
+<div class="item"><a href="map_magic.html">🗺️ 11. Térkép</a></div>
+
 </div>
 
-<script>
-// ÚJ sorszámozású GPS koordináták
-var points = {
-    1: [48.458778474079644, 18.893065338672766],
-    2: [48.45829941730642, 18.895435474680212],
-    3: [48.45817379907542, 18.891779748517433],
-    4: [48.457843131457814, 18.89242178790117],
-    5: [48.457398878321044, 18.89954651928789],
-    6: [48.458768874651476, 18.89251472068234],
-    7: [48.45859382644014, 18.8942143213098],
-    8: [48.4592632240785, 18.892564461628098],
-    9: [48.45585776644632, 18.89604413976757],
-    10: [48.459660821214214, 18.892483135756006],
-    11: [48.4554781460307, 18.893316934868203],
-    12: [48.459319547021025, 18.89161814188512],
-    13: [48.458539586572684, 18.89638949750488],
-    14: [48.45816992322699, 18.89557572579342],
-    15: [48.45890914461514, 18.89310602069543]
-};
-
-// Térkép létrehozása
-var map = L.map('map').setView([48.4587, 18.8938], 15);
-
-// Csempék
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19
-}).addTo(map);
-
-// Marker (piros pötty)
-var marker = L.marker([48.4587, 18.8938]).addTo(map);
-
-// Ugrás kattintással
-function goTo(id) {
-    let p = points[id];
-    map.setView(p, 17);
-    marker.setLatLng(p);
-}
-
-// GPS követés
-if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(pos => {
-        let lat = pos.coords.latitude;
-        let lon = pos.coords.longitude;
-        marker.setLatLng([lat, lon]);
-    });
-}
-</script>
+</div>
 
 </body>
 </html>
